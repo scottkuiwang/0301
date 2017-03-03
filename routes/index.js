@@ -9,4 +9,8 @@ router.get('/', function(req, res, next) {
 router.get('/movediv',function(req,res,next){
     res.render('movediv',{});
 });
+/*drag div from one place to anther place*/
+router.get('/dragdiv',function(req,res,next){
+  res.render('dragdiv',{});
+});
 module.exports = router;
