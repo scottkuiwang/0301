@@ -5,5 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-
+/*move div from one place to anther place*/
+router.get('/movediv',function(req,res,next){
+    res.render('movediv',{});
+});
 module.exports = router;
