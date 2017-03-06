@@ -42,8 +42,6 @@
                             $(document).mousemove(function (event) {
                                         if (isMove) {
                                             obj.css({'left':event.pageX - abs_x, 'top':event.pageY - abs_y});
-                                            console.log('pageX：'+event.pageX);
-                                            console.log('pageY：'+event.pageY);
                                             $('#content').html('X:'+event.pageX+'/Y:'+event.pageY);
                                         }
                                     }
@@ -52,22 +50,24 @@
                                         isMove = false;
                                         var newleft=0;
                                         var newtop=0;
-                                        if(event.pageX<220&&event.pageX>=100){
+                                        var change_left=event.pageX - abs_x;
+                                        var change_top=event.pageY - abs_y;
+                                        if(change_left<220&&change_left>=100){
                                             newleft=200;
                                         }
-                                        if(event.pageY<220&&event.pageY>=100){
+                                        if(change_top<220&&change_top>=100){
                                             newtop=200;
                                         }
-                                        if(event.pageX<320&&event.pageX>=220){
+                                        if(change_left<320&&change_left>=220){
                                             newleft=320;
                                         }
-                                        if(event.pageY<320&&event.pageY>=220){
+                                        if(change_top<320&&change_top>=220){
                                             newtop=320;
                                         }
                                         if(newleft!=0){
-                                            obj.css({'left':newleft-abs_x,'top':newtop-abs_y});
+                                            obj.css({'left':newleft,'top':newtop});
                                         }
-                                        console.log('x:'+newleft,'y:'+newtop);
+                                        console.log('x:'+change_left,'y:'+change_top);
                                     }
                             );
                         }
