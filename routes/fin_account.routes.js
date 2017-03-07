@@ -3,8 +3,9 @@
  */
 var express = require('express');
 var router = express.Router();
-var finbaseinfo=require('./api/fin.baseinfo.controller.js');
+var finbaseinfo=require('../api/fin.baseinfo.controller.js');
 
-router.get('/');
+//新增记账科目
+router.post('/',finbaseinfo.createFinItemInfo);
 
 module.exports=router;
