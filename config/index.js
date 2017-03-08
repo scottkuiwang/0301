@@ -13,7 +13,7 @@ var all = {
     mongo: {
         //uri: 'mongodb://139.196.111.194:37017/KEP',
         //uri: 'mongodb://localhost/kep'
-        uri: 'mongodb://localhost/wx'
+        uri: 'mongodb://localhost/mole'
         //uri: 'mongodb://139.196.111.194:37017/keptest',
         //uri:'mongodb://bigpixel-east.chinacloudapp.cn:27201/bigpixel-test,bigpixel-east.chinacloudapp.cn:27202/bigpixel-test,bigpixel-north.chinacloudapp.cn:27101/bigpixel-test,bigpixel-north.chinacloudapp.cn:27102/bigpixel-test/?replicaSet=jingkun',
         //options: {
