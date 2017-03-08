@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 
 var tb_hangyesSchema = new Schema({
     Id:Number,
+    AgentId:Number,
     Hyname:String,
     Stat:Number,
     Fanwei:String
