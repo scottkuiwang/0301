@@ -12,7 +12,6 @@ var tb_productsSchema = new Schema({
     MaxPrice:Number,
     DwId:Number,
     IsChanged:Number,
-    ParkId:Number,
     Stat:Number,
     IsReg:Number,
     IsBank:Number,
