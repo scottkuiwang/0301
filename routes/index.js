@@ -13,4 +13,8 @@ router.get('/movediv',function(req,res,next){
 router.get('/dragdiv',function(req,res,next){
   res.render('dragdiv',{});
 });
+/* Login. */
+router.get('/login', function(req, res, next) {
+    res.render('login');
+});
 module.exports = router;
