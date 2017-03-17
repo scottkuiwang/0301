@@ -1,0 +1,482 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Amaze UI Admin user Examples</title>
+    <meta name="description" content="这是一个 user 页面">
+    <meta name="keywords" content="user">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+    以获得更好的体验！</p>
+<![endif]-->
+
+<header class="am-topbar am-topbar-inverse admin-header">
+    <div class="am-topbar-brand">
+        <strong>Amaze UI</strong> <small>后台管理模板</small>
+    </div>
+
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+    <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+        <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+            <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li>
+            <li class="am-dropdown" data-am-dropdown>
+                <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+                    <span class="am-icon-users"></span> 管理员 <span class="am-icon-caret-down"></span>
+                </a>
+                <ul class="am-dropdown-content">
+                    <li><a href="#"><span class="am-icon-user"></span> 资料</a></li>
+                    <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
+                    <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
+                </ul>
+            </li>
+            <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="am-cf admin-main">
+    <!-- sidebar start -->
+    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+        <div class="am-offcanvas-bar admin-offcanvas-bar">
+            <ul class="am-list admin-sidebar-list">
+                <li><a href="admin-index.html"><span class="am-icon-home"></span> 首页</a></li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 页面模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+                        <li><a href="admin-user.html" class="am-cf"><span class="am-icon-check"></span> 个人资料<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                        <li><a href="admin-help.html"><span class="am-icon-puzzle-piece"></span> 帮助页</a></li>
+                        <li><a href="admin-gallery.html"><span class="am-icon-th"></span> 相册页面<span class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
+                        <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 系统日志</a></li>
+                        <li><a href="admin-404.html"><span class="am-icon-bug"></span> 404</a></li>
+                    </ul>
+                </li>
+                <li><a href="admin-table.html"><span class="am-icon-table"></span> 表格</a></li>
+                <li><a href="admin-form.html"><span class="am-icon-pencil-square-o"></span> 表单</a></li>
+                <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
+            </ul>
+
+            <div class="am-panel am-panel-default admin-sidebar-panel">
+                <div class="am-panel-bd">
+                    <p><span class="am-icon-bookmark"></span> 公告</p>
+                    <p>时光静好，与君语；细水流年，与君同。—— Amaze UI</p>
+                </div>
+            </div>
+
+            <div class="am-panel am-panel-default admin-sidebar-panel">
+                <div class="am-panel-bd">
+                    <p><span class="am-icon-tag"></span> wiki</p>
+                    <p>Welcome to the Amaze UI wiki!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">订单管理</strong> / <small>新增订单</small></div>
+            </div>
+
+            <hr/>
+
+            <div class="am-g">
+                <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+                    <div class="am-panel am-panel-default" style="height: 720px;">
+                        <div class="am-panel-bd">
+                            <div class="am-g" >
+                                <div class="am-u-sm-12">
+                                    <table>
+                                        <tr>
+                                            <td width="100px;">产品类别：</td>
+                                            <td ><select style="width: 120px;" >
+                                                <option value=""></option>
+                                                <option value="0">工商注册</option>
+                                                <option value="1">工商变更</option>
+                                                <option value="2">财务代理</option>
+                                            </select></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100px;">产品名称：</td>
+                                            <td ><input type="text" style="width: 120px;" ></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100px;">
+                                                <button style="margin-top: 3px;" type="button" class="am-btn am-btn-primary">查询</button>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="am-g" >
+                                <div style="height: 600px;overflow-y: auto;width: 93%;margin-left: 10px;">
+                                    <div id="productlist"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+                    <form class="am-form am-form-horizontal">
+                        <div class="am-form-group" style="margin-bottom: -4px;">
+                            <label for="user-name" class="am-u-sm-2 am-form-label" style="margin-top:-5px;">客户</label>
+                            <div class="am-u-sm-10">
+                                <input readonly type="text" id="user-name" placeholder="请点击选取客户"  >
+                                <small><a href="#">点击选取客户</a></small>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-email" class="am-u-sm-2 am-form-label" style="margin-top:-5px;">手机</label>
+                            <div class="am-u-sm-10">
+                                <input readonly type="email" id="user-email" >
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-phone" class="am-u-sm-2 am-form-label" style="margin-top:-5px;">QQ</label>
+                            <div class="am-u-sm-10">
+                                <input readonly type="tel" id="user-phone" >
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-QQ" class="am-u-sm-2 am-form-label" style="margin-top:-5px;">微信</label>
+                            <div class="am-u-sm-10">
+                                <input readonly type="number" pattern="[0-9]*" id="user-QQ" >
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-weibo" class="am-u-sm-2 am-form-label" style="margin-top:-5px;">收件地址</label>
+                            <div class="am-u-sm-10">
+                                <input  type="text" id="user-weibo" >
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-weibo" class="am-u-sm-2 am-form-label" style="margin-top:10px;">订单金额</label>
+                            <div class="am-u-sm-5">
+                                应收：<input  type="text" id="amt_all" readonly >
+                            </div>
+                            <div class="am-u-sm-5">
+                                实收：<input  type="text" id="amt_payed" >
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-weibo" class="am-u-sm-2 am-form-label" style="margin-top:-15px;">订单明细</label>
+                            <div class="am-u-sm-10">
+                                <div class="am-panel am-panel-default" style="height: 360px;overflow-y: auto;">
+                                    <div class="am-panel-bd">
+                                        <div id="tablelist"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-10 am-u-sm-push-2">
+                                <button type="button" class="am-btn am-btn-primary">确定</button>
+                            </div>
+                            <div class="am-u-sm-10">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <footer class="admin-content-footer">
+            <hr>
+            <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+        </footer>
+
+    </div>
+    <!-- content end -->
+
+</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<footer>
+    <hr>
+    <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+</footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="layer/layer.js"></script>
+<script type="text/javascript">
+    var userlist=[];
+    var productlist=[];
+    var productD=[];//存储当前明细产品数据
+    $(function(){
+        inifrm();
+        $('#add').click(function(){
+            addProduct();
+        });
+    });
+
+    //获取用户列表
+    var getuserlist=function(){
+        $.ajax({
+            type:'get',
+            url:'/user/list',
+            data:{},
+            dataType:'json',
+            success:function(datas){
+                if(datas.msg=='YES'){
+                    var data=datas.data;
+                    for(var i=0;i<data.length;i++){
+                        var temp={
+                            uid:data[i].uid,
+                            name:data[i].name
+                        };
+                        userlist.push(temp);
+                    }
+                    console.log(userlist);
+                }
+            },
+            error:function(e){
+                console.log(e);
+            }
+        });
+    };
+    //获取产品列表
+    var getproductlist=function(){
+        var divlist='';
+        $.ajax({
+            type:'get',
+            url:'/product/list',
+            data:{},
+            dataType:'json',
+            success:function(datas){
+                if(datas.msg=='YES'){
+                    var data=datas.data;
+                    for(var i=0;i<data.length;i++){
+                        var temp={
+                            Pid:data[i].Pid,
+                            ProductName:data[i].ProductName,
+                            Price:data[i].Price,
+                            MinPrice:data[i].MinPrice,
+                            MaxPrice:data[i].MaxPrice,
+                            IsReg:data[i].IsReg,
+                            IsBank:data[i].IsBank,
+                            IsCommon:data[i].IsCommon,
+                            IsFinance:data[i].IsFinance,
+                            Months:data[i].Months,
+                            IsUrgent:data[i].IsUrgent
+                        };
+                        divlist=divlist+'<tr>' +
+                                '<td><a href="#" onclick=addProduct("'+data[i].Pid+'") >选择</a>'
+                                +'<div style="width:270px;word-wrap:break-word; word-break:break-all;">'+data[i].ProductName+'</div>'
+                                + '</td>' +
+                                '</tr>';
+                        productlist.push(temp);
+                    }
+                    divlist='<table class="am-table am-table-striped am-table-hover table-main">'+divlist+'</table>';
+                    $('#productlist').html(divlist);
+                }
+            },
+            error:function(e){
+                console.log(e);
+            }
+        });
+    };
+    //加载数据到明细
+    var getProductDlist=function(Pid){
+        productD=[];
+        var temp={};
+        $('.pid').each(function(){
+            temp={
+                pid:this.id,
+                productname:$('#Pname_'+this.id).html(),
+                price:$('#Price_'+this.id).val()
+            };
+            productD.push(temp);
+        });
+
+        var ProcductInfo=getProductInfo(Pid);
+        if(productD.length==0){
+            temp={
+                pid:Pid,
+                productname:ProcductInfo.productname,
+                price:ProcductInfo.price
+            };
+            productD.push(temp);
+        }else{
+            for(var i=0;i<productD.length;i++){
+                if(checkProductId(Pid)==true){
+                    temp={
+                        pid:Pid,
+                        productname:ProcductInfo.productname,
+                        price:ProcductInfo.price
+                    };
+                    productD.push(temp);
+                }
+            }
+        }
+        //绑定数据到订单明细
+        var templist='';
+        var amt=0;
+        for(var j=0;j<productD.length;j++){
+            templist=templist+'<tr>'+
+                    '<td ><a href="#"><span onclick="show(1);" id="Pname_'+productD[j].pid
+                    +'" style="width:350px;word-wrap:break-word; word-break:break-all; ">'+productD[j].productname+'</span></a></td>'+
+                    '<td><input onchange=updateprice("'+productD[j].pid+'") id="Price_'+productD[j].pid+'" type="number" style="width:70px;" value="'+productD[j].price+'" /></td>'+
+                    '<td>'+
+                    '<div style="margin-top: 10px;"><span class="am-icon-trash-o"></span> <a href="#" onclick="delProduct('+productD[j].pid+')">删除</a></div>'+
+                    '</td>'+
+                    '<td style="width: 0px;"><span id="'+productD[j].pid+'" class="pid"></span></td>'+
+                    '</tr>';
+            amt=amt+parseFloat(productD[j].price);
+        }
+        templist=' <table class="am-table am-table-striped am-table-hover table-main" >'+
+                '<thead>'+
+                '<tr>'+
+                '<th class="table-title" style="height: 24px;width:350px;" >品名</th><th class="table-author am-hide-sm-only">价格</th><th class="table-set"></th>'+
+                '</tr>'+
+                '</thead><tbody>'+templist+'</tbody></table>';
+        $('#tablelist').html(templist);
+        $('#amt_all').val(amt);
+        $('#amt_payed').val(amt);
+    };
+    //校验Id是否重复
+    var checkProductId=function(id){
+        var flag=true;
+        for(var i=0;i<productD.length;i++){
+            if(id==productD[i].pid){
+                flag=false;
+            }
+        }
+        return flag;
+    };
+    //弹出产品详细
+    var show=function(id){
+        alert(id);
+    };
+    //添加产品到详细
+    var addProduct=function(Pid){
+        getProductDlist(Pid);
+    };
+    //删除并更新
+    var delProduct=function(Pid){
+        layer.confirm('是否确定删除？', {
+            btn: ['是','否'] //按钮
+        }, function(){
+            productD=[];
+            var temp={};
+            var templist='';
+            var amt=0;
+            $('.pid').each(function(){
+                if(this.id!=Pid){
+                    temp={
+                        pid:this.id,
+                        productname:$('#Pname_'+this.id).html(),
+                        price:$('#Price_'+this.id).val()
+                    };
+                    productD.push(temp);
+                    amt=amt+parseFloat($('#Price_'+this.id).val());
+
+                    templist=templist+'<tr>'+
+                            '<td ><a href="#"><span onclick="show(1);" id="Pname_'+this.id
+                            +'" style="width:350px;word-wrap:break-word; word-break:break-all; ">'+$('#Pname_'+this.id).html()+'</span></a></td>'+
+                            '<td><input onchange=updateprice("'+this.id+'") id="Price_'+this.id+'" type="number" style="width:70px;" value="'+$('#Price_'+this.id).val()+'" /></td>'+
+                            '<td>'+
+                            '<div style="margin-top: 10px;"><span class="am-icon-trash-o"></span> <a href="#" onclick="delProduct('+this.id+')">删除</a></div>'+
+                            '</td>'+
+                            '<td style="width: 0px;"><span id="'+this.id+'" class="pid"></span></td>'+
+                            '</tr>';
+                }
+            });
+            templist=' <table class="am-table am-table-striped am-table-hover table-main">'+
+                    '<thead>'+
+                    '<tr>'+
+                    '<th class="table-title" style="height: 24px;width:350px;" >品名</th><th class="table-author am-hide-sm-only">价格</th><th class="table-set"></th>'+
+                    '</tr>'+
+                    '</thead><tbody>'+templist+'</tbody></table>';
+            $('#tablelist').html(templist);
+            layer.msg('删除成功！', {icon: 1,time: 600});
+            $('#amt_all').val(amt);
+            $('#amt_payed').val(amt);
+        }, function(){
+        });
+    };
+    //从产品库中获取产品参数
+    var getProductInfo=function(Pid){
+        var temp={};
+        for(var i=0;i<productlist.length;i++){
+            if(productlist[i].Pid==Pid){
+                temp={
+                    pid:Pid,
+                    productname:productlist[i].ProductName,
+                    price:productlist[i].Price,
+                    MinPrice:productlist[i].MinPrice,
+                    MaxPrice:productlist[i].MaxPrice
+                };
+            }
+        }
+        return temp;
+    };
+    //修改价格
+    var updateprice=function(Pid){
+        var price=$('#Price_'+Pid).val();
+        var ProductInfo=getProductInfo(Pid);
+        var pro_price=ProductInfo.price;
+        if(parseFloat(price)<parseFloat(pro_price)){
+            alert('当前产品最低价格：'+pro_price+'元');
+            $('#Price_'+Pid).val(pro_price);
+        }
+        jisuanamt();
+    };
+    //合计总额
+    var jisuanamt=function(){
+        var amt=0;
+        $('.pid').each(function(){
+            amt = amt + parseFloat($('#Price_' + this.id).val());
+        });
+        $('#amt_all').val(amt);
+        $('#amt_payed').val(amt);
+    };
+    var inifrm=function(){
+        $.ajax({
+            type:'get',
+            url:'/inifrm',
+            data:{},
+            dataType:'json',
+            success:function(data){
+                console.log(data);
+                getuserlist();
+                getproductlist();
+            },
+            error:function(err){
+                console.log(err);
+            }
+        });
+    }
+
+
+
+</script>
+</body>
+</html>

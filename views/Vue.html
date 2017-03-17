@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{message}}
+</div>
+<div id="didi-navigator">
+    <ul>
+        <li v-for="tab in tabs">
+            {{ tab.text }}
+        </li>
+    </ul>
+</div>
+
+</body>
+<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/js/jquery.min.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: '#didi-navigator',
+        data: {
+            tabs: [
+                { text: '巴士' },
+                { text: '快车' },
+                { text: '专车' },
+                { text: '顺风车' },
+                { text: '出租车' },
+                { text: '代驾' }
+            ]
+        }
+    })
+    new Vue({
+        el:'#app',
+        data:{message:'hello vue.js'}
+    })
+</script>
+</html>

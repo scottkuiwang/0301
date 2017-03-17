@@ -7,6 +7,7 @@ var Schema = mongoose.Schema;
 
 var tb_proceduresSchema = new Schema({
     Id:Number,
+    AgentId:Number,//使用者
     ProcedureName:String,//名称
     Stat:Number,//状态
     MoneyCost:Number,//成本

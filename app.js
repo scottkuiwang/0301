@@ -4,9 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-//var index = require('./routes/index');
-//var users = require('./routes/users');
+var config = require('./config');
+var mongoose = require('mongoose');
+var session = require('express-session');
 
 var app = express();
 
@@ -14,6 +14,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -23,10 +24,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use('/', index);
-//app.use('/users', users);
+/*使用session*/
+app.use(session({
+  resave: true, // don't save session if unmodified
+  saveUninitialized: false, // don't create session until something stored
+  secret: 'kep'
+}));
 
 require('./routes')(app);
+
+// 连接MongoDB数据库
+mongoose.connect(config.mongo.uri);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

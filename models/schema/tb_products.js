@@ -5,18 +5,22 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var tb_productsSchema = new Schema({
-    Id:Number,
+    AgentId:Number,
+    Pid:Number,
+    Type:Number,
     ProductName:String,//名称
     Price:Number,//价格
     MinPrice:Number,//最低价格
     MaxPrice:Number,//最高价格
     DwId:Number,//单位id
-    IsChanged:Number,//是否可修改
+    IsChanged:String,//是否可修改
     Stat:Number,//状态
-    IsReg:Number,//是否是注册项目
-    IsBank:Number,//是否是银行开户
-    IsCommon:Number,//是否是一般性的业务
-    IsUrgent:Number//是否是加急项目(无流程)
+    IsReg:String,//是否是注册项目
+    IsBank:String,//是否是银行开户
+    IsCommon:String,//是否是一般性的业务
+    IsFinance:String,//是否是财务代理
+    Months:Number,//财务代理月数
+    IsUrgent:String//是否是加急项目(无流程)
 });
 
 module.exports = mongoose.model('tb_products', tb_productsSchema);
