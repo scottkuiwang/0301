@@ -2,7 +2,9 @@
  * Created by apple on 2017/3/12.
  */
 var product=require('./../models/schema/tb_products.js');
-var async=require('async');
+var async=require('async'),
+    url = require("url");
+var _ = require('lodash');
 
 //生成产品
 //设置产品和工艺间的关系
@@ -65,7 +67,6 @@ exports.removeProduct=function(req,res){
 };
 
 //获取产品列表
-
 exports.list=function(req,res){
     try{
         if(req.session.userinfo==undefined){
@@ -82,6 +83,75 @@ exports.list=function(req,res){
             });
         }
     }catch (e){
+        console.log(e);
+    }
+};
+
+//查询产品列表
+exports.query=function(req,res){
+    try{
+        if(req.session.userinfo) {
+            var args=url.parse(req.url,true).query;
+            var limit=args.count;
+            var skip=args.currentpage;
+            var where = {'AgentId':parseInt(req.session.userinfo.AgentId)};
+
+            if(args.ProductName&& args.ProductName != "") {
+                var qs=new RegExp(args.ProductName);
+                _.assign(where,{"ProductName":qs});
+            }
+            //是否工商注册
+            if(args.IsReg && args.IsReg != "") {
+                _.assign(where,{"IsReg":parseInt(args.IsReg)});
+            }
+            //是否银行开户
+            if(args.IsBank && args.IsBank != "") {
+                _.assign(where,{"IsBank":parseInt(args.IsBank)});
+            }
+            //是否普通业务
+            if(args.IsCommon && args.IsCommon != "") {
+                _.assign(where,{"IsCommon":parseInt(args.IsCommon)});
+            }
+            //是否银行代理
+            if(args.IsFinance && args.IsFinance != "") {
+                _.assign(where,{"IsFinance":parseInt(args.IsFinance)});
+            }
+            if(args.Type && args.Type != "") {
+                _.assign(where,{"Type":parseInt(args.Type)});
+            }
+            if(args.Stat && args.Stat != "") {
+                _.assign(where,{"Stat":parseInt(args.Stat)});
+            }
+            if(limit==0){
+                product.count(where,function(err,countdata){
+                    if(err) { console.log(err);}
+                    product.find(where,function(err,data){
+                        if(err) { console.log(err);}
+                        var result={
+                            'count':countdata,
+                            'data':data
+                        };
+                        return res.jsonp(200, {'msg':'yes','result':result});
+                    });
+                });
+            }else{
+                product.count(where,function(err,countdata){
+                    if(err) { console.log(err);}
+                    product.find(where,function(err,data){
+                        if(err) { console.log(err);}
+                        var result={
+                            'count':countdata,
+                            'data':data
+                        };
+                        return res.jsonp(200, {'msg':'yes','result':result});
+                    }).sort({'Id':-1}).limit(parseInt(limit)).skip(parseInt(skip)*parseInt(limit));
+                });
+            }
+
+        }else{
+            return res.jsonp(200,{'msg':'no'});
+        }
+    }catch(e){
         console.log(e);
     }
 };

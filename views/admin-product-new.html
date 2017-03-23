@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="icon" type="image/png" href="assets/i/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <link rel="icon" type="image/png" href="../assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-    <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
-    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -89,7 +89,7 @@
     <div class="admin-content">
         <div class="admin-content-body">
             <div class="am-cf am-padding am-padding-bottom-0">
-                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">订单管理</strong> / <small>新增订单</small></div>
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">产品管理</strong> / <small>新增产品</small></div>
             </div>
 
             <hr/>
@@ -102,11 +102,7 @@
                                 <div class="am-u-sm-12">
                                     <table>
                                         <tr>
-                                            <td width="100px;">产品类别：</td>
-                                            <td ><div id="type_list"></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td width="100px;">产品名称：</td>
+                                            <td width="100px;">业务过程名称：</td>
                                             <td ><input id="product-name" type="text" style="width: 120px;" ></td>
                                         </tr>
                                         <tr>
@@ -216,11 +212,11 @@
 <![endif]-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="assets/js/jquery.min.js"></script>
+<script src="../assets/js/jquery.min.js"></script>
 <!--<![endif]-->
-<script src="assets/js/amazeui.min.js"></script>
-<script src="assets/js/app.js"></script>
-<script src="layer/layer.js"></script>
+<script src="../assets/js/amazeui.min.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="../layer/layer.js"></script>
 <script type="text/javascript">
     var userlist=[];
     var productlist=[];
@@ -579,7 +575,7 @@
                         temp=temp+'<option value="'+data[i].Id+'">'+data[i].TypeName+'</option>';
                     }
                     temp='<select id="typelist" style="width: 120px;" >'
-                        +temp+'</select>';
+                            +temp+'</select>';
                     $('#type_list').html(temp);
                 }
             },

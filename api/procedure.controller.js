@@ -2,7 +2,9 @@
  * Created by apple on 2017/3/8.
  */
 var procedure=require('./../models/schema/tb_procedures.js');
-
+var async=require('async'),
+    url = require("url");
+var _ = require('lodash');
 //校验过程是否存在
 //含修改数据前验证数据
 exports.checkProcedure=function(req,res){
@@ -60,6 +62,7 @@ exports.createProcedure=function(req,res){
                 Id:Id,
                 AgentId:AgentId,
                 ProcedureName:req.body.ProcedureName,
+                TypeId:req.body.TypeId,
                 Stat:0,
                 MoneyCost:req.body.MoneyCost,
                 TimeCost:req.body.TimeCost
@@ -87,10 +90,12 @@ exports.updateProcedure=function(req,res){
         var ProcedureName = req.body.ProcedureName;
         var MoneyCost = req.body.MoneyCost;
         var TimeCost = req.body.TimeCost;
+        var TypeId=req.body.TypeId;
         try {
             var postdata = {
                 AgentId: AgentId,
                 ProcedureName: ProcedureName,
+                TypeId:TypeId,
                 MoneyCost: MoneyCost,
                 TimeCost: TimeCost
             };
@@ -119,8 +124,11 @@ exports.listProcedure=function(req,res){
             var qs=new RegExp(args.ProcedureName);
             _.assign(where,{"ProcedureName":qs});
         }
-        if(args.stat && args.stat != "") {
-            _.assign(where,{"stat":args.stat});
+        if(args.Stat && args.Stat != "") {
+            _.assign(where,{"Stat":args.Stat});
+        }
+        if(args.TypeId && args.TypeId != "") {
+            _.assign(where,{"TypeId":args.TypeId});
         }
         procedure.count(where,function(err,countdata){
             if(err) { console.log(err);}

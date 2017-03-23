@@ -9,6 +9,10 @@ var product=require('../api/product.controller.js');
 router.get('/create', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
+
+router.get('/new', function(req, res, next) {
+    res.render('admin-product-new', { title: 'Express' });
+});
 //新增
 //router.post('/',procedure.createProcedure);
 ////校验数据
@@ -17,6 +21,8 @@ router.get('/create', function(req, res, next) {
 //router.post('/:Id/update',procedure.updateProcedure);
 //列表
 router.get('/list',product.list);
+//查询
+router.get('/query',product.query);
 ////获取详细数据
 //router.get('/:Id/getProdureById',procedure.getProdureById);
 ////删除
