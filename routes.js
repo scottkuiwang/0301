@@ -11,4 +11,5 @@ module.exports=function(app){
     app.use('/customer',require('./routes/customer.routes.js'));
     app.use('/type',require('./routes/type.routes.js'));
     app.use('/tec',require('./routes/tec.routes.js'));
+    app.use('/service',require('./routes/service.routes.js'));
 };
