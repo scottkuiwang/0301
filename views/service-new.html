@@ -90,14 +90,14 @@
         <div class="admin-content-body">
             <div class="am-cf am-padding am-padding-bottom-0">
                 <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">业务管理</strong> / <small>新增业务</small></div>
-                <div style="float: right;" ><a href=""><span class="am-icon-user am-text-warning"></span><span style="margin-left: 5px;" class="am-text-warning">查询工作人员负荷</span></a></div>
+                <div style="float: right;" ><span class="am-icon-user am-text-warning"></span><a href="#"><span style="margin-left: 5px;cursor: hand;" onclick="showTasklist();"  class="am-text-warning">查询工作人员负荷</span></a></div>
             </div>
 
             <hr/>
 
             <div class="am-g">
                 <div class="am-u-sm-12 am-u-md-12">
-                    <div class="am-form" style="margin-left: -15px;margin-top: -15px;">
+                    <div class="am-form" style="margin-left: -15px;margin-top: -15px;margin-bottom: -10px;">
                         <div class="am-panel-hd am-cf"  style="color: #1091d2;">订单信息</div>
                         <div id="div-plain-order"  class="am-panel-bd am-collapse am-in" style="margin-top: -20px;">
                             <table style="width: 100%;">
@@ -120,51 +120,64 @@
                             </table>
                         </div>
                     </div>
-                    <div class="am-panel am-panel-default">
-                        <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-4'}">工商注册<span class="am-icon-chevron-down am-fr" ></span></div>
-                        <div id="collapse-panel-4" class="am-in" style="padding: 8px;padding-left: 14px;">
-                            <ul class="am-list admin-content-task">
-                                <li>
-                                    <div class="admin-task-bd" >
-                                        流程：<span style="color: #2ea8e5;">采集注册信息</span>
-                                    </div>
-                                    <div class="admin-task-bd">
-                                        执行序号：<span style="color: #2ea8e5;">1</span>  执行人：<span style="color: #2ea8e5;">王葵</span>  预计完成日期：<input id="start" style=" border: none;color: #2ea8e5;margin-top: -2px;" type="text" placeholder="请选择日期" data-am-datepicker readonly >
-                                    </div>
-                                    <div class="admin-task-bd">
-                                        备注：无
-                                    </div>
-                                    <div class="am-cf">
-                                        <div class="am-btn-toolbar am-fl">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <button type="button" onclick="editProcess();" class="am-btn am-btn-default"><span class="am-icon-pencil"></span><span style="margin-left: 3px;">编辑</span></button>
-                                                <button type="button" class="am-btn am-btn-default"><span class="am-icon-times"></span><span style="margin-left: 3px;">删除</span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="admin-task-bd" >
-                                        流程：<span style="color: #2ea8e5;">核名</span>
-                                    </div>
-                                    <div class="admin-task-bd">
-                                        执行序号：<span style="color: #2ea8e5;">未设置</span>  执行人：<span style="color: #2ea8e5;">未设置</span>  预计完成日期：<span style="color: #2ea8e5;">无</span>
-                                    </div>
-                                    <div class="admin-task-bd">
-                                        备注：无
-                                    </div>
-                                    <div class="am-cf">
-                                        <div class="am-btn-toolbar am-fl">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <button type="button" class="am-btn am-btn-default"><span class="am-icon-pencil"></span><span style="margin-left: 3px;">编辑</span></button>
-                                                <button type="button" class="am-btn am-btn-default"><span class="am-icon-times"></span><span style="margin-left: 3px;">删除</span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <div id="task"></div>
+                    <!--<div class="am-panel am-panel-default">-->
+                        <!--<div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-4'}">工商注册<span class="am-icon-chevron-down am-fr" ></span></div>-->
+                        <!--<div id="collapse-panel-4" class="am-in" style="padding: 8px;padding-left: 14px;">-->
+                            <!--<ul class="am-list admin-content-task">-->
+                                <!--<li>-->
+                                    <!--<div class="admin-task-bd" >-->
+                                        <!--流程：<span style="color: #2ea8e5;">采集注册信息</span>-->
+                                    <!--</div>-->
+                                    <!--<div class="admin-task-bd">-->
+                                        <!--执行序号：<span style="color: #2ea8e5;">1</span>-->
+                                    <!--</div>-->
+                                    <!--<div class="admin-task-bd">-->
+                                        <!--执行人：<span style="color: #2ea8e5;">无</span>-->
+                                    <!--</div>-->
+                                    <!--<div class="admin-task-bd">-->
+                                        <!--预计完成日期：<span style="color: #2ea8e5;">无</span>-->
+                                    <!--</div>-->
+                                    <!--<div class="admin-task-bd">-->
+                                        <!--备注：<span style="color: #2ea8e5;">无</span>-->
+                                    <!--</div>-->
+                                    <!--<div class="am-cf">-->
+                                        <!--<div class="am-btn-toolbar am-fl">-->
+                                            <!--<div class="am-btn-group am-btn-group-xs">-->
+                                                <!--<button type="button" onclick="editProcess();" class="am-btn am-btn-default"><span class="am-icon-pencil"></span><span style="margin-left: 3px;">编辑</span></button>-->
+                                                <!--<button type="button" class="am-btn am-btn-default"><span class="am-icon-times"></span><span style="margin-left: 3px;">删除</span></button>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<div class="admin-task-bd" >-->
+                                        <!--流程：<span style="color: #2ea8e5;">核名</span>-->
+                                    <!--</div>-->
+                                    <!--<div class="admin-task-bd">-->
+                                        <!--执行序号：<span style="color: #2ea8e5;">2</span>-->
+                                    <!--</div>-->
+                                    <!--<div class="admin-task-bd">-->
+                                        <!--执行人：<span style="color: #2ea8e5;">无</span>-->
+                                    <!--</div>-->
+                                    <!--<div class="admin-task-bd">-->
+                                        <!--预计完成日期：<span style="color: #2ea8e5;">无</span>-->
+                                    <!--</div>-->
+                                    <!--<div class="admin-task-bd">-->
+                                        <!--备注：<span style="color: #2ea8e5;">无</span>-->
+                                    <!--</div>-->
+                                    <!--<div class="am-cf">-->
+                                        <!--<div class="am-btn-toolbar am-fl">-->
+                                            <!--<div class="am-btn-group am-btn-group-xs">-->
+                                                <!--<button type="button" class="am-btn am-btn-default"><span class="am-icon-pencil"></span><span style="margin-left: 3px;">编辑</span></button>-->
+                                                <!--<button type="button" class="am-btn am-btn-default"><span class="am-icon-times"></span><span style="margin-left: 3px;">删除</span></button>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>
@@ -199,28 +212,96 @@
 <script src="../assets/js/app.js"></script>
 <script src="../layer/layer.js"></script>
 <script type="text/javascript">
-
+    var processlist=[];
+    var productIds=[];
+    var new_n=0;
+    var taskinfo={
+//        agentid:'0',//公司用户编号
+//        seterId:'1',//流程设置者编号
+//        productId:'1',//产品编号
+//        productName:'工商注册',//产品名称
+//        processId:'1',//流程编号
+//        processName:'采集注册信息',//流程名
+//        orderId:'1',//执行序号
+//        userId:'1',//执行人Id
+//        userName:'王葵',//执行人
+//        supposedday:'20170328',//预计完成日期
+//        notes:'无',//备注
+//        stat:'1',//当前状态(0-未激活，1-未执行，2-执行中，3-已完成，99-已删除）
+//        finishedday:'20170401'//实际完成日期
+    };
     $(function(){
         inifrm();
-
+        $('#bn_update_process').click(function(){
+            updateProcess(function(){
+                updateTaskm();
+            });
+        });
     });
-
-
     //构建模型
     var createModel=function(){
 
     };
     //编辑流程
-    var editProcess=function(){
+    var editProcess=function(n){
+        new_n=n;
         layer.open({
             title:'编辑流程',
             area: ['600px', '360px'],
             type: 1,
-            shadeClose: true, //点击遮罩关闭
+            shadeClose: false, //点击遮罩关闭
             content: $("#div-show-process")
         });
+        setTimeout(function(){
+            //序号
+            $('#Orderlist').val(processlist[n].OrderId);
+            //过程名
+            $('#ProcessName').val(processlist[n].ProcessName);
+            //预计完成日期
+            var Supposedday=JSON.stringify(processlist[n].Supposedday);
+            console.log('Supposedday:'+Supposedday);
+            if(Supposedday!='0'){
+                var set_finishday=Supposedday.substr(0,4)+'-'
+                +Supposedday.substr(4,2)+'-'
+                +Supposedday.substr(6,2);
+                $('#finishday').datepicker('setValue',set_finishday);
+                console.log(set_finishday);
+            }
+            //执行人
+            $('#Userlist').val(processlist[n].UserId);
+            //备注
+            $('#Notes').val(processlist[n].Notes);
+        },200);
     };
-
+    //修改流程参数
+    var updateProcess=function(callback){
+        for(var i=0;i<processlist.length;i++){
+            if(new_n==i){
+                processlist[i].OrderId=$('#Orderlist').val();
+                processlist[i].Supposedday=$('#finishday').val().replace('-','').replace('-','');
+                processlist[i].UserId=$('#Userlist').val();
+                processlist[i].UserName=$('#Userlist').find("option:selected").text();
+                processlist[i].Notes=$('#Notes').val();
+                //赋值
+                $('#order_'+i).html($('#Orderlist').val());
+                $('#user_'+i).html($('#Userlist').find("option:selected").text());
+                $('#sup_'+i).html($('#finishday').val());
+                $('#note_'+i).html($('#Notes').val());
+            }
+        }
+        layer.closeAll();
+        callback();
+    };
+    //弹出人员负荷
+    var showTasklist=function(){
+        layer.open({
+            title:'人员任务负荷',
+            area: ['600px', '360px'],
+            type: 1,
+            shadeClose: false, //点击遮罩关闭
+            content: $("#div-show-task-list")
+        });
+    };
     //初始化执行人
     var iniuserlist=function(){
         $.ajax({
@@ -228,7 +309,8 @@
             url:'/user/list',
             data:{},
             dataType:'json',
-            success:function(data){
+            success:function(datas){
+                var data=datas.data;
                 var user_list='';
                 for(var i=0;i<data.length;i++){
                     temp={
@@ -237,7 +319,7 @@
                     };
                     user_list=user_list+'<option value="'+data[i].uid+'">'+data[i].name+'</option>';
                 }
-                user_list='<select id="userlist">'+user_list+'</select>';
+                user_list='<select id="Userlist"><option value=""></option>'+user_list+'</select>';
                 $('#Users').html(user_list);
             },
             error:function(e){
@@ -245,6 +327,194 @@
             }
         });
     };
+    //人员负荷
+    var usertasklist=function(){
+        $.ajax({
+            type:'get',
+            url:'/user/task',
+            data:{},
+            dataType:'json',
+            success:function(datas){
+                var data=datas.data;
+                var divlist='';
+                for(var i=0;i<data.length;i++){
+                    divlist=divlist+'<tr>' +
+                            '<td>'
+                            +'<div style="width:80px;word-wrap:break-word; word-break:break-all;">'+data[i].Uname+'</div>'
+                            + '</td>' +
+                            '<td>'
+                            +'<div style="width:80px;word-wrap:break-word; word-break:break-all;">'+data[i].Task_wjh+'</div>'
+                            + '</td>' +
+                            '<td>'
+                            +'<div style="width:80px;word-wrap:break-word; word-break:break-all;">'+data[i].Task_wzx+'</div>'
+                            + '</td>' +
+                            '<td>'
+                            +'<div style="width:80px;word-wrap:break-word; word-break:break-all;">'+data[i].Task_zxz+'</div>'
+                            + '</td>' +
+                            '</tr>';
+                }
+                divlist='<table class="am-table am-table-striped am-table-hover table-main">'
+                +'<tr>' +
+                '<td>'
+                +'<div style="width:80px;word-wrap:break-word; word-break:break-all;">执行人</div>'
+                + '</td>' +
+                '<td>'
+                +'<div style="width:80px;word-wrap:break-word; word-break:break-all;">未激活</div>'
+                + '</td>' +
+                '<td>'
+                +'<div style="width:80px;word-wrap:break-word; word-break:break-all;">未执行</div>'
+                + '</td>' +
+                '<td>'
+                +'<div style="width:80px;word-wrap:break-word; word-break:break-all;">执行中</div>'
+                + '</td>' +
+                '</tr>'
+                +divlist+'</table>';
+                $('#tasklist').html(divlist);
+            },
+            error:function(e){
+                console.log(e);
+            }
+        });
+    };
+    //读取初始化任务列表
+    var initasklist=function(){
+        $.ajax({
+            type:'get',
+            url:'/order/getTaskmInfos',
+            data:{'Oid':1},
+            dataType:'json',
+            success:function(result){
+                var data=result.data;
+                for(var i=0;i<data.length;i++){
+                    taskinfo={
+                        'Id':data[i].Id,
+                        'AgentId':data[i].AgentId,
+                        'SeterId':data[i].SeterId,
+                        'ProductId':data[i].ProductId,
+                        'ProductName':data[i].ProductName,
+                        'ProcessId':data[i].ProcessId,
+                        'ProcessName':data[i].ProcessName,
+                        'OrderId':data[i].OrderId,
+                        'UserId':data[i].UserId,
+                        'UserName':data[i].UserName,
+                        'Supposedday':data[i].Supposedday,
+                        'Notes':data[i].Notes,
+                        'Stat':data[i].Stat,
+                        'Finishedday':data[i].Finishedday
+                    };
+                    processlist.push(taskinfo);
+                }
+                splitproduct();
+            },
+            error:function(e){
+                console.log(e);
+            }
+        });
+    };
+    //拆分产品
+    var splitproduct=function(){
+        var temp_0={};
+        for(var i=0;i<processlist.length;i++){
+            checkproduct(processlist[i].ProductId,function(data){
+                if(data==false){
+                    temp_0={
+                        ProductId:processlist[i].ProductId,
+                        ProductName:processlist[i].ProductName
+                    };
+                    productIds.push(temp_0);
+                }
+            });
+        }
+        var pId='';
+        var temp='';
+        var divplan='';
+        var set_finishday='';
+        for(var m=0;m<productIds.length;m++){
+            pId=productIds[m].ProductId;
+            temp='';
+            for(var n=0;n<processlist.length;n++){
+                if(pId==processlist[n].ProductId){
+                    try{
+                        var fininshday=JSON.stringify(processlist[n].Supposedday);
+                        if(fininshday!='0'){
+                            set_finishday=fininshday.substr(0,4)+'-'+ fininshday.substr(4,2)
+                                    +'-'+ fininshday.substr(6,2);
+                        }else{
+                            set_finishday='未设置';
+                        }
+                    }catch(e){
+                        set_finishday='未设置';
+                    }
+                    temp=temp+'<li>'+
+                            '<div class="admin-task-bd" >'+
+                            '流程：<span style="color: #2ea8e5;">'+processlist[n].ProcessName+'</span>'+
+                            '</div>'+
+                            '<div class="admin-task-bd">'+
+                            '执行序号：<span style="color: #2ea8e5;" id="order_'+n+'">'+processlist[n].OrderId+'</span>'+
+                            '</div>'+
+                            '<div class="admin-task-bd">'+
+                            '执行人：<span style="color: #2ea8e5;" id="user_'+n+'">'+processlist[n].UserName+'</span>'+
+                            '</div>'+
+                            '<div class="admin-task-bd">'+
+                            '预计完成日期：<span style="color: #2ea8e5;" id="sup_'+n+'">'+set_finishday+'</span>'+
+                            '</div>'+
+                            '<div class="admin-task-bd">'+
+                            '备注：<span style="color: #2ea8e5;" id="note_'+n+'">'+processlist[n].Notes+'</span>'+
+                            '</div>'+
+                            '<div class="am-cf">'+
+                            '<div class="am-btn-toolbar am-fl">'+
+                            '<div class="am-btn-group am-btn-group-xs">'+
+                            '<button type="button" onclick="editProcess('+n+');" class="am-btn am-btn-default"><span class="am-icon-pencil"></span><span style="margin-left: 3px;">编辑</span></button>'+
+                            '<button type="button" class="am-btn am-btn-default"><span class="am-icon-times"></span><span style="margin-left: 3px;">删除</span></button>'+
+                            '</div>'+
+                            '</div>'+
+                            '</div>'+
+                            '</li>';
+                }
+            }
+            divplan=divplan+'<div class="am-panel am-panel-default"><div class="am-panel-hd am-cf" data-am-collapse="{target: \'#collapse-panel-'+pId+'\'}">'+productIds[m].ProductName+'<span class="am-icon-chevron-down am-fr" ></span></div>'+
+                    '<div id="collapse-panel-'+pId+'" class="am-in" style="padding: 8px;padding-left: 14px;">'+
+                    '<ul class="am-list admin-content-task">'+temp+'</ul> </div></div></div>';
+            console.log('m:'+m);
+        }
+        $('#task').html(divplan);
+    };
+    //校验productIds是否重复
+    var checkproduct=function(Id,callback){
+        var flag=false;
+        for(var i=0;i<productIds.length;i++){
+            if(Id==productIds[i].ProductId){
+                flag=true;
+            }
+        }
+        callback(flag);
+    };
+    //修改设置
+    var updateTaskm=function(){
+        var set_finishday='0';
+        if($('#finishday').val()!=''){
+            set_finishday=$('#finishday').val().replace('-','').replace('-','');
+        }
+        var postdata={
+            'OrderId':$('#Orderlist').val(),
+            'UserId':$('#Userlist').val(),
+            'UserName':$('#Userlist').find("option:selected").text(),
+            'Supposedday':set_finishday,
+            'Notes':$('#Notes').val()
+        };
+        $.ajax({
+            type:'post',
+            url:'/taskm/'+processlist[new_n].Id+'/updateTaskm',
+            data:postdata,
+            dataType:'json',
+            success:function(data){
+            },
+            error:function(e){
+                console.log(e);
+            }
+        })
+    }
+    //初始化
     var inifrm=function(){
         $.ajax({
             type:'get',
@@ -253,14 +523,14 @@
             dataType:'json',
             success:function(data){
                 iniuserlist();
+                usertasklist();
+                initasklist();
             },
             error:function(err){
                 console.log(err);
             }
         });
     }
-
-
 </script>
 </body>
 <!--弹出层时背景层DIV-->
@@ -290,7 +560,7 @@
     <div class="am-form">
         <div class="am-form-group">
             <label id="lb_orderid">执行序号</label>
-            <select id="orderlist">
+            <select id="Orderlist">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -312,17 +582,25 @@
             <label id="lb_linkman">流程名称</label>
             <input id="ProcessName" type="text" readonly>
         </div>
+        <div class="am-form-group">
+            <label id="lb_finishday">预计完成日期</label>
+            <input id="finishday"  type="text" placeholder="请选择日期" data-am-datepicker readonly >
+        </div>
         <div  class="am-form-group">
             <label id="lb_mobile">执行人</label>
             <span id="Users"></span>
         </div>
         <div  class="am-form-group">
             <label id="lb_taitou">备注</label>
-            <input id="MaxPrice" type="text" >
+            <input id="Notes" type="text" >
         </div>
         <div  class="am-form-group">
         <button id="bn_update_process"  type="button" class="am-btn am-btn-primary">确定</button>
         </div>
     </div>
+</div>
+<!--弹出层工作人员负荷DIV-->
+<div id="div-show-task-list" class="am-container addCompany">
+    <div id="tasklist"></div>
 </div>
 </html>

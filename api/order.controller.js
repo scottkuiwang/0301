@@ -3,6 +3,7 @@
  */
 var orderm=require('./../models/schema/tb_order_ms.js');
 var orderd=require('./../models/schema/tb_order_ds.js');
+var taskms=require('./../models/schema/tb_task_ms.js');
 var async=require('async'),
     url = require("url");
 var _ = require('lodash');
@@ -89,6 +90,30 @@ var save_order_d=function(UserId,Oid,data,callback){
             callback()
         });
     }catch (e){
+        console.log(e);
+    }
+};
+
+
+
+
+//从tb_task_ms中读取任务数据
+exports.getTaskmInfos=function(req,res){
+    try{
+        if(req.session.userinfo==undefined){
+            return res.json(200,{'msg':'no',data:{}});
+        }else{
+            var agentid=req.session.userinfo.AgentId;
+            var where={
+                AgentId:parseInt(agentid),
+                PomId:parseInt(req.query.Oid)
+            };
+            taskms.find(where,function(err,data){
+                if(err){console.log(err);}
+                return res.jsonp(200,{'msg':'YES',data:data});
+            }).sort({'PodId':1,'ProductId':1});
+        }
+    }catch(e){
         console.log(e);
     }
 };
