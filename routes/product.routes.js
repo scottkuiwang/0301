@@ -11,7 +11,10 @@ router.get('/create', function(req, res, next) {
 });
 
 router.get('/new', function(req, res, next) {
-    res.render('admin-product-new', { title: 'Express' });
+    res.render('product-new', { title: 'Express' });
+});
+router.get('/test', function(req, res, next) {
+    res.render('test', { title: 'Express' });
 });
 //新增
 //router.post('/',procedure.createProcedure);

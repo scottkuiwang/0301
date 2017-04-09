@@ -1,0 +1,339 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Amaze UI Admin user Examples</title>
+    <meta name="description" content="这是一个 user 页面">
+    <meta name="keywords" content="user">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="../image/png" href="../assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="../assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+    以获得更好的体验！</p>
+<![endif]-->
+
+<header class="am-topbar am-topbar-inverse admin-header">
+    <div class="am-topbar-brand">
+        <strong>Amaze UI</strong> <small>后台管理模板</small>
+    </div>
+
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+    <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+        <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+            <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li>
+            <li class="am-dropdown" data-am-dropdown>
+                <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+                    <span class="am-icon-users"></span> 管理员 <span class="am-icon-caret-down"></span>
+                </a>
+                <ul class="am-dropdown-content">
+                    <li><a href="#"><span class="am-icon-user"></span> 资料</a></li>
+                    <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
+                    <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
+                </ul>
+            </li>
+            <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="am-cf admin-main">
+    <!-- sidebar start -->
+    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+        <div class="am-offcanvas-bar admin-offcanvas-bar">
+            <div id="leftmenu"></div>
+            <div class="am-panel am-panel-default admin-sidebar-panel">
+                <div class="am-panel-bd">
+                    <p><span class="am-icon-bookmark"></span> 公告</p>
+                    <p>时光静好，与君语；细水流年，与君同。—— Amaze UI</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">基础数据</strong> / <small>执行过程</small></div>
+            </div>
+
+            <hr/>
+
+            <div class="am-g">
+                <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+                    <div class="am-panel am-panel-default" style="height: 720px;">
+                        <div class="am-panel-bd">
+                            <div class="am-g" >
+                                <div class="am-u-sm-12">
+                                    <table>
+                                        <tr>
+                                            <td width="100px;">过程类别：</td>
+                                            <td ><select id="typequery" data-am-selected="{btnSize: 'sm'}">
+                                                <option value="0">所有类别</option>
+                                                <option value="1">工商注册</option>
+                                                <option value="2">工商变更</option>
+                                                <option value="3">银行开户</option>
+                                                <option value="4">财务代理</option>
+                                            </select></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="height: 10px;"></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100px;">过程名称：</td>
+                                            <td ><input id="process-name" type="text" style="width: 200px;" ></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100px;">
+                                                <button id="bn_query_process" style="margin-top: 3px;" type="button" class="am-btn am-btn-primary">查询</button>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="am-g" >
+                                <div style="height: 500px;overflow-y: auto;width: 93%;margin-left: 10px;">
+                                    <div id="processlist"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+                    <form class="am-form am-form-horizontal">
+                        <div class="am-form-group" >
+                            <label for="ProductName" class="am-u-sm-2 am-form-label" style="margin-top:-5px;">产品名称</label>
+                            <div class="am-u-sm-10">
+                                <input id="ProductName" type="text" placeholder="请输入产品名称">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="Price" class="am-u-sm-2 am-form-label" style="margin-top:-5px;">报价</label>
+                            <div class="am-u-sm-10">
+                                <input id="Price" type="number" placeholder="请输入对外报价">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="MinPrice" class="am-u-sm-2 am-form-label" style="margin-top:-5px;">最低报价</label>
+                            <div class="am-u-sm-10">
+                                <input id="MinPrice" type="number" placeholder="请输入对外最低报价">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="MaxPrice" class="am-u-sm-2 am-form-label" style="margin-top:-5px;">最高报价</label>
+                            <div class="am-u-sm-10">
+                                <input id="MaxPrice" type="number" placeholder="请输入对外最高报价">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label class="am-u-sm-2 am-form-label" style="margin-top:-5px;">单位</label>
+                            <div class="am-u-sm-10">
+                                <select id="dwitem">
+                                    <option value="0"></option>
+                                    <option value="1">次</option>
+                                    <option value="2">个</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label   class="am-u-sm-2 am-form-label" style="margin-top:-5px;">产品属性</label>
+                            <div class="am-u-sm-10">
+                                <select id="type">
+                                    <option value="0"></option>
+                                    <option value="1">注册项目</option>
+                                    <option value="2">银行开户</option>
+                                    <option value="3">一般性的业务</option>
+                                    <option value="4">加急项目</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label class="am-u-sm-2 am-form-label" style="margin-top:-15px;">生产过程</label>
+                            <div class="am-u-sm-10">
+                                <div class="am-panel am-panel-default" >
+                                    <div class="am-panel-bd">
+                                        <div id="tablelist"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-10 am-u-sm-push-2">
+                                <button type="button" class="am-btn am-btn-primary">确定</button>
+                            </div>
+                            <div class="am-u-sm-10">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <footer class="admin-content-footer">
+            <hr>
+            <div id="footer"></div>
+        </footer>
+    </div>
+    <!-- content end -->
+
+</div>
+
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="../assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="../javascripts/jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="../assets/js/amazeui.min.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="../layer/layer.js"></script>
+<script src="../javascripts/jquery-1.10.2.min.js"></script>
+<script src="../js/common.js"></script>
+<script type="text/javascript">
+
+    var processList=[];//生成过程
+
+    $(function(){
+        inifrm();
+        setTimeout(function(){
+            inifrms();
+        },500);
+
+//        inifrm();
+//        $('#add').click(function(){
+//            addProduct();
+//        });
+//        $('#bn_query_customer').click(function(){
+//            queryCustomer();
+//        });
+//        $('#bn_query_product').click(function(){
+//            queryProductList();
+//        });
+    });
+    //查询生成过程
+    var queryProcessList=function(){
+        var divlist='';
+        $.ajax({
+            type:'get',
+            url:'/product/query',
+            data:{'keywords':$('#process-name').val(),'TypeId':$('#typequery').val(),'Stat':0,'count':100,'currentpage':0},
+            dataType:'json',
+            success:function(datas){
+                if(datas.msg=='yes'){
+                    var data=datas.result.data;
+                    processList=[];
+                    for(var i=0;i<data.length;i++){
+                        var temp={
+                            Id:data[i].Id,
+                            TypeId:data[i].TypeId,
+                            TypeName:data[i].TypeName,
+                            AgentId:data[i].AgentId,
+                            ProcedureName:data[i].ProcedureName,
+                            Stat:data[i].Stat,
+                            MoneyCost:data[i].MoneyCost,
+                            TimeCost:data[i].TimeCost
+                        };
+                        divlist=divlist+'<tr>' +
+                                '<td><a href="#" onclick=addProcess("'+data[i].Id+'") >选择</a>'
+                                +'<div style="width:270px;word-wrap:break-word; word-break:break-all;">'+data[i].ProcedureName+'</div>'
+                                + '</td>' +
+                                '</tr>';
+                        processList.push(temp);
+                    }
+                    divlist='<table class="am-table am-table-striped am-table-hover table-main">'+divlist+'</table>';
+                    $('#processlist').html(divlist);
+                }
+            },
+            error:function(e){
+                console.log(e);
+            }
+        });
+    };
+    var inifrm=function(){
+        $.ajax({
+            type:'get',
+            url:'/inifrm',
+            data:{},
+            dataType:'json',
+            success:function(data){
+                iniProcess();
+            },
+            error:function(err){
+                console.log(err);
+            }
+        });
+    };
+    //初始化产品生产过程
+    var iniProcess=function(){
+        $.ajax({
+            type:'get',
+            url:'/procedure/query',
+            data:{'count':10,'currentpage':0,'Stat':'0'},
+            dataType:'json',
+            success:function(datas){
+                if(datas.msg=='yes'){
+                    var data=datas.result.data;
+                    var divlist='';
+                    processList=[];
+                    for(var i=0;i<data.length;i++){
+                        var temp={
+                            Id:data[i].Id,
+                            TypeId:data[i].TypeId,
+                            TypeName:data[i].TypeName,
+                            AgentId:data[i].AgentId,
+                            ProcedureName:data[i].ProcedureName,
+                            Stat:data[i].Stat,
+                            MoneyCost:data[i].MoneyCost,
+                            TimeCost:data[i].TimeCost
+                        };
+                        divlist=divlist+'<tr>' +
+                                '<td><a href="#" onclick=addProcess("'+data[i].Id+'") >选择</a>'
+                                +'<div style="width:270px;word-wrap:break-word; word-break:break-all;">'+data[i].ProcedureName+'</div>'
+                                + '</td>' +
+                                '</tr>';
+                        processList.push(temp);
+                    }
+                    divlist='<table class="am-table am-table-striped am-table-hover table-main">'+divlist+'</table>';
+                    $('#processlist').html(divlist);
+                }
+            },
+            error:function(e){
+                console.log(e);
+            }
+        });
+    };
+    //初始化操作
+    var inifrms=function(){
+        $.commonoperation._createFooterHtml(function(data){
+            $('#footer').html(data);
+        });
+        $.commonoperation._createLeftMenu(function(data){
+            console.log(data);
+            $('#leftmenu').html(data);
+        });
+    };
+
+</script>
+</body>
+</html>

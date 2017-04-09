@@ -50,34 +50,11 @@
     <!-- sidebar start -->
     <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
         <div class="am-offcanvas-bar admin-offcanvas-bar">
-            <ul class="am-list admin-sidebar-list">
-                <li><a href="admin-index.html"><span class="am-icon-home"></span> 首页</a></li>
-                <li class="admin-parent">
-                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 页面模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
-                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-                        <li><a href="admin-user.html" class="am-cf"><span class="am-icon-check"></span> 个人资料<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
-                        <li><a href="admin-help.html"><span class="am-icon-puzzle-piece"></span> 帮助页</a></li>
-                        <li><a href="admin-gallery.html"><span class="am-icon-th"></span> 相册页面<span class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
-                        <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 系统日志</a></li>
-                        <li><a href="admin-404.html"><span class="am-icon-bug"></span> 404</a></li>
-                    </ul>
-                </li>
-                <li><a href="admin-table.html"><span class="am-icon-table"></span> 表格</a></li>
-                <li><a href="admin-form.html"><span class="am-icon-pencil-square-o"></span> 表单</a></li>
-                <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
-            </ul>
-
+            <div id="leftmenu"></div>
             <div class="am-panel am-panel-default admin-sidebar-panel">
                 <div class="am-panel-bd">
-                    <p><span class="am-icon-bookmark"></span> 公告</p>
+                    <p><span class="am-icon-bookmark"></span> 帮助</p>
                     <p>时光静好，与君语；细水流年，与君同。—— Amaze UI</p>
-                </div>
-            </div>
-
-            <div class="am-panel am-panel-default admin-sidebar-panel">
-                <div class="am-panel-bd">
-                    <p><span class="am-icon-tag"></span> wiki</p>
-                    <p>Welcome to the Amaze UI wiki!</p>
                 </div>
             </div>
         </div>
@@ -88,7 +65,7 @@
     <div class="admin-content">
         <div class="admin-content-body">
             <div class="am-cf am-padding">
-                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页</strong> / <small>一些常用模块</small></div>
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">基础数据</strong> / <small>执行过程</small></div>
             </div>
             <div class="am-g">
                 <div class="am-u-sm-12" >
@@ -97,15 +74,26 @@
                         <div class="am-u-sm-12 am-u-md-6">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a href="/kylcomquery"><input type="button" id="add" name="" value="查询公司资料" class="am-btn am-btn-primary am-btn-sm am-fl"></a>
+                                    <a href="#"><input type="button" id="add" name="" value="新增过程" class="am-btn am-btn-primary am-btn-sm am-fl"></a>
                                 </div>
                             </div>
                         </div>
                         <div class="am-u-sm-12 am-u-md-3">
+                            <div class="am-form-group">
+                                <select id="typequery" data-am-selected="{btnSize: 'sm'}">
+                                    <option value="0">所有类别</option>
+                                    <option value="1">工商注册</option>
+                                    <option value="2">工商变更</option>
+                                    <option value="3">银行开户</option>
+                                    <option value="4">财务代理</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-u-sm-12 am-u-md-3">
                             <div class="am-input-group am-input-group-sm">
-                                <input type="text" class="am-form-field">
+                                <input type="text" id="keywords" class="am-form-field">
                                   <span class="am-input-group-btn">
-                                    <button class="am-btn am-btn-default" type="button">搜索</button>
+                                    <button id="query" class="am-btn am-btn-default" type="button">搜索</button>
                                   </span>
                             </div>
                         </div>
@@ -113,81 +101,14 @@
                 </div>
 
                 <div class="am-u-sm-12">
-                    <table class="am-table am-table-bd am-table-striped admin-content-table">
-                        <thead>
-                        <tr>
-                            <th>ID</th><th>用户名</th><th>最后成交任务</th><th>成交订单</th><th>管理</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr><td>1</td><td>John Clark</td><td><a href="#">Business management</a></td> <td><span class="am-badge am-badge-success">+20</span></td>
-                            <td>
-                                <div class="am-dropdown" data-am-dropdown>
-                                    <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
-                                    <ul class="am-dropdown-content">
-                                        <li><a href="#">1. 编辑</a></li>
-                                        <li><a href="#">2. 下载</a></li>
-                                        <li><a href="#">3. 删除</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr><td>2</td><td>风清扬</td><td><a href="#">公司LOGO设计</a> </td><td><span class="am-badge am-badge-danger">+2</span></td>
-                            <td>
-                                <div class="am-dropdown" data-am-dropdown>
-                                    <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
-                                    <ul class="am-dropdown-content">
-                                        <li><a href="#">1. 编辑</a></li>
-                                        <li><a href="#">2. 下载</a></li>
-                                        <li><a href="#">3. 删除</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr><td>3</td><td>詹姆斯</td><td><a href="#">开发一款业务数据软件</a></td><td><span class="am-badge am-badge-warning">+10</span></td>
-                            <td>
-                                <div class="am-dropdown" data-am-dropdown>
-                                    <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
-                                    <ul class="am-dropdown-content">
-                                        <li><a href="#">1. 编辑</a></li>
-                                        <li><a href="#">2. 下载</a></li>
-                                        <li><a href="#">3. 删除</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr><td>4</td><td>云适配</td><td><a href="#">适配所有网站</a></td><td><span class="am-badge am-badge-secondary">+50</span></td>
-                            <td>
-                                <div class="am-dropdown" data-am-dropdown>
-                                    <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
-                                    <ul class="am-dropdown-content">
-                                        <li><a href="#">1. 编辑</a></li>
-                                        <li><a href="#">2. 下载</a></li>
-                                        <li><a href="#">3. 删除</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>5</td><td>呵呵呵</td>
-                            <td><a href="#">基兰会获得BUFF</a></td>
-                            <td><span class="am-badge">+22</span></td>
-                            <td>
-                                <div class="am-dropdown" data-am-dropdown>
-                                    <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div id="list"></div>
                 </div>
                 <div class="am-u-sm-12">
                     <div class="am-fr"style="float: left;">
                         <ul class="am-pagination">
-                            <li class="am-disabled"><a href="#">上一页</a></li>
-                            <li><a href="#">下一页</a></li>
-                            <li>总记录数：200</li>
+                            <li id="pro"><a href="#">上一页</a></li>
+                            <li id="nex"><a href="#">下一页</a></li>
+                            <li id="totle"></li>
                         </ul>
                     </div>
                 </div>
@@ -195,11 +116,10 @@
         </div>
         <footer class="admin-content-footer">
             <hr>
-            <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+            <div id="footer"></div>
         </footer>
     </div>
     <!-- content end -->
-
 </div>
 
 <a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
@@ -217,15 +137,24 @@
 <script src="assets/js/app.js"></script>
 <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
 <script src="layer/layer.js"></script>
-
+<script src="js/common.js"></script>
 <script type="text/javascript">
+    var pagecount=9;
+    var nowpage=0;
     //当前页
-    var currentpage=0;
+    var currentpage=1;
+    //ID
+    var Id='';
+    //count
+    var count=0;
+    //pages
+    var pages=0;
     class proceduce{};
     $("#add").click(function () {
+        $('#ProcedureName').val('');
         layer.open({
             title:'新增过程',
-            area: ['600px', '360px'],
+            area: ['600px', '440px'],
             type: 1,
             shadeClose: true, //点击遮罩关闭
             content: $("#div_add")
@@ -235,44 +164,159 @@
         inifrm();
         $('#admin').html('当前用户');
         $('#bn_add').click(function(){
-            var newobj=new proceduce();
-            newobj.check(function(flag){
-                console.log(flag);
-                if(flag=='YES'){
-                    newobj.add();
-                }
-                if(flag=='NO'){
-                    alert('当前过程已经存在！');
-                    return;
-                }
-                if(flag=='no'){
-                    window.location.href='/login';
-                }
-            });
+            if(checkdata()==false){
+                return ;
+            }else{
+                var newobj=new proceduce();
+                newobj.check(function(flag){
+                    console.log(flag);
+                    if(flag=='YES'){
+                        newobj.add();
+                    }
+                    if(flag=='NO'){
+                        alert('当前过程已经存在！');
+                        return;
+                    }
+                    if(flag=='no'){
+                        window.location.href='/login';
+                    }
+                });
+            }
+        });
+        $('#bn_update').click(function(){
+            if(checkdataforupdate()==false){
+                return ;
+            }else{
+                checkDataBeforeUpdate(function(flag){
+                    if(flag=='YES'){
+                        var newobj=new proceduce();
+                        newobj.edit();
+                    }
+                    if(flag=='NO'){
+                        alert('当前过程已经存在！');
+                        return;
+                    }
+                    if(flag=='no'){
+                        window.location.href='/login';
+                    }
+                });
+            }
+        });
+        $('#query').click(function(){
+            nowpage=0;
+            currentpage=1;
+            nextPage();
+        });
+        $('#pro').click(function(){
+            proPage();
+        });
+        $('#nex').click(function(){
+            nextPage();
         });
     });
-    proceduce.prototype.check=function(callback){
-        var flag='true';
+    //校验数据
+    var checkdata=function(){
         if($('#ProcedureName').val()==''){
             alert('过程名称不能为空！');
-            callback('false');
+            return false;
+        }
+        if($('#Typelist').val()==''){
+            alert('请选择过程类别！');
+            return false;
         }
         if($('#MoneyCost').val()==''){
-            alert('单价可以为0，不能为空！');
-            callback('false');
+            alert('执行成本可以为0，不能为空！');
+            return false;
         }
         if($('#TimeCost').val()==''){
-            alert('时间成本可以为0，不能为空！');
-            callback('false');
+            alert('执行成本可以为0，不能为空！');
+            return false;
         }
         if(parseFloat($('#MoneyCost').val())<0){
             alert('单价不能小于0！');
-            callback('false');
+            return false;
         }
         if(parseFloat($('#TimeCost').val())<0){
             alert('时间成不能小于0！');
-            callback('false');
+            return false;
         }
+        return true;
+    };
+    //校验数据(修改)
+    var checkdataforupdate=function(){
+        if($('#ProcedureName_edit').val()==''){
+            alert('过程名称不能为空！');
+            return false;
+        }
+        if($('#Typelist_edit').val()==''){
+            alert('请选择过程类别！');
+            return false;
+        }
+        if($('#MoneyCost_edit').val()==''){
+            alert('执行成本可以为0，不能为空！');
+            return false;
+        }
+        if($('#TimeCost_edit').val()==''){
+            alert('时间成本可以为0，不能为空！');
+            return false;
+        }
+        if(parseFloat($('#MoneyCost_edit').val())<0){
+            alert('执行成本不能小于0！');
+            return false;
+        }
+        if(parseFloat($('#TimeCost_edit').val())<0){
+            alert('时间成不能小于0！');
+            return false;
+        }
+        return true;
+    };
+    //修改数据
+    var editProcess=function(n){
+        Id=n;
+        layer.open({
+            title:'编辑过程',
+            area: ['600px', '360px'],
+            type: 1,
+            shadeClose: false, //点击遮罩关闭
+            content: $("#div_edit")
+        });
+        setTimeout(function(){
+            $.ajax({
+                type:'get',
+                url:'/procedure/'+n+'/getProdureById',
+                data:{},
+                dataType:'json',
+                success:function(data){
+                    $('#ProcedureName_edit').val(data.ProcedureName);
+                    $('#Typelist_edit').val(data.TypeId);
+                    $('#MoneyCost_edit').val(data.MoneyCost);
+                    $('#TimeCost_edit').val(data.TimeCost);
+                },
+                error:function(e){
+                    console.log(e);
+                }
+            });
+        },200);
+    };
+    //修改保存前校验数据是否可修改
+    var checkDataBeforeUpdate=function(callback){
+        var flag='true';
+        $.ajax({
+            type:'get',
+            url:'/procedure/check',
+            data:{'ProcedureName':$('#ProcedureName_edit').val(),'stat':'0','Id':Id},
+            dataType:'json',
+            success:function(data){
+                console.log(data);
+                callback(data.msg);
+            },
+            error:function(e){
+                console.log(e);
+            }
+        });
+    };
+    proceduce.prototype.check=function(callback){
+        var flag='true';
         $.ajax({
             type:'get',
             url:'/procedure/check',
@@ -291,7 +335,7 @@
         $.ajax({
             type:'post',
             url:'/procedure/',
-            data:{'ProcedureName':$('#ProcedureName').val(),'MoneyCost':$('#MoneyCost').val(),'TimeCost':$('#TimeCost').val()},
+            data:{'ProcedureName':$('#ProcedureName').val(),'MoneyCost':$('#MoneyCost').val(),'TimeCost':$('#TimeCost').val(),'TypeId':$('#Typelist').val()},
             dataType:'json',
             success:function(data){
                 if(data.msg=='YES'){
@@ -307,7 +351,27 @@
         });
     };
     proceduce.prototype.edit=function(){
-
+        $.ajax({
+            type:'post',
+            url:'/procedure/'+Id+'/update',
+            data:{'ProcedureName':$('#ProcedureName_edit').val(),'MoneyCost':$('#MoneyCost_edit').val(),'TimeCost':$('#TimeCost_edit').val(),'TypeId':$('#Typelist_edit').val()},
+            dataType:'json',
+            success:function(data){
+                if(data.msg=='YES'){
+                    alert('修改成功!');
+                    //重新加载查询列表
+                    $('#ProcedureName_'+Id).html($('#ProcedureName_edit').val());
+                    $('#TypeName_'+Id).html($('#Typelist_edit').find("option:selected").text());
+                    $('#MoneyCost_'+Id).html($('#MoneyCost_edit').val());
+                    $('#TimeCost_'+Id).html($('#TimeCost_edit').val());
+                }else{
+                    window.location.href='/login';
+                }
+            },
+            error:function(e){
+                console.log(e);
+            }
+        });
     };
     proceduce.prototype.remove=function(){
 
@@ -330,6 +394,32 @@
             }
         });
     };
+    //初始化类别
+    var iniTypeList=function(){
+        $.ajax({
+            type:'get',
+            url:'/type/query',
+            data:{},
+            dataType:'json',
+            success:function(datas){
+                var data=datas.result;
+                var temp_list='';
+                var temp_list_edit='';
+                var temp_list_query='';
+                for(var i=0;i<data.length;i++){
+                    temp_list=temp_list+'<option value="'+data[i].Id+'">'+data[i].TypeName+'</option>';
+                    temp_list_edit=temp_list_edit+'<option value="'+data[i].Id+'">'+data[i].TypeName+'</option>';
+                }
+                temp_list='<select id="Typelist" "><option value=""></option>'+temp_list+'</select>';
+                temp_list_edit='<select id="Typelist_edit" "><option value=""></option>'+temp_list_edit+'</select>';
+                $('#Types').html(temp_list);
+                $('#Types_edit').html(temp_list_edit);
+            },
+            error:function(e){
+                console.log(e);
+            }
+        });
+    };
     var inifrm=function(){
         $.ajax({
             type:'get',
@@ -337,29 +427,67 @@
             data:{},
             dataType:'json',
             success:function(data){
-                console.log(data);
+                iniTypeList();
+                iniPage();
+                inifrms();
             },
             error:function(err){
                 console.log(err);
             }
         });
-    }
+    };
+    //初始化操作
+    var inifrms=function(){
+        $.commonoperation._createFooterHtml(function(data){
+            $('#footer').html(data);
+        });
+        $.commonoperation._createLeftMenu(function(data){
+            console.log(data);
+            $('#leftmenu').html(data);
+        });
+    };
     //上一页
     function proPage(){
-        if(currentpage=='0'){
+        if(nowpage==0){
             alert('已是最前页');
         }
         else{
-            var stat='';
-            currentpage=parseInt(currentpage)-1;
+            currentpage=nowpage-1;
             $.ajax({
                 type: "get",
                 //方法所在页面和方法名
                 url: "/procedure/query",
-                data:{stat:0,currentpage:currentpage,count:6,ProcedureName:},
+                data:{keywords:$('#keywords').val().trim(),Stat:0,currentpage:currentpage,count:pagecount,TypeId:$('#typequery').val()},
                 dataType: "json",
-                success: function (data) {
-
+                success: function (result) {
+                    var data=result.result.data;
+                    console.log(data);
+                    count=result.result.count;
+                    $('#totle').html('总记录数：'+count);
+                    pages=Math.ceil(count/pagecount);
+                    nowpage--;
+                    var temp='';
+                    for(var i=0;i<data.length;i++){
+                        temp=temp+'<tr>'+
+                                '<td>'+data[i].Id+'</td><td><span id="ProcedureName_'+data[i].Id+'">'+data[i].ProcedureName+'</span></td>'+
+                                '<td><span id="TypeName_'+data[i].Id+'">'+data[i].TypeName+'</span></td>'+
+                                '<td><span id="MoneyCost_'+data[i].Id+'">'+data[i].MoneyCost+'</span></td>'+
+                                '<td><span id="TimeCost_'+data[i].Id+'">'+data[i].TimeCost+'</span></td>'+
+                                '<td>'+
+                                '<div class="am-dropdown" data-am-dropdown>'+
+                                '<button  onclick="editProcess('+data[i].Id+');" class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span></button>'+
+                                '</div>'+
+                                '</td>'+
+                                '</tr>';
+                    }
+                    temp='<tbody>'+temp+'</tbody>';
+                    temp='<table class="am-table am-table-bd am-table-striped admin-content-table">'+
+                            '<thead>'+
+                            '<tr>'+
+                            '<th>ID</th><th>过程名称</th><th>过程类别</th><th>成本(元)</th><th>周期(天)</th><th>管理</th>'+
+                            '</tr>'+
+                            '</thead>'+temp+'</table>';
+                    $('#list').html(temp);
                 },
                 error: function (err) {
                     console.log(err);
@@ -369,50 +497,88 @@
     }
     //下一页
     function nextPage(){
-        if($('#yearlog').val()==''){
-            alert('请选择年度！');
+        if(currentpage==pages){
+            alert('已是最后一页！');
             return;
         }
-        if($('#monthlog').val()==''){
-            alert('请选择月份！');
-            return;
-        }
-        var strMonth=$('#yearlog').val()+$('#monthlog').val();
-        currentpage=parseInt(currentpage)+1;
+        currentpage=nowpage+1;
         $.ajax({
             type: "get",
             //方法所在页面和方法名
-            url: "/task/queryfintasklist",
-            data:{keywords:$('#keywords').val().trim(),monthlog:strMonth,geterid:$('#finpeople').val(),stat:$('#stat').val()},
+            url: "/procedure/query",
+            data:{keywords:$('#keywords').val().trim(),Stat:0,currentpage:currentpage,count:pagecount,TypeId:$('#typequery').val()},
             dataType: "json",
-            success: function (data) {
-                var strtemp='';var opt='';var strstat='';var strurl='';
+            success: function (result) {
+                var data=result.result.data;
+                count=result.result.count;
+                $('#totle').html('总记录数：'+count);
+                pages=Math.ceil(count/pagecount);
+                nowpage++;
+                currentpage++;
+                var temp='';
                 for(var i=0;i<data.length;i++){
-                    strurl='<a target="_blank" href=\"'+data[i].taskinfo.url+'\">查看 →</a>';
-                    if(data[i].taskinfo.stat=='-1'){
-                        strstat='未执行';
-                    }
-                    if(data[i].taskinfo.stat=='0'){
-                        strstat='执行中';
-                    }
-                    if(data[i].taskinfo.stat=='1'){
-                        strstat='已完成';
-                    }
-                    if(data[i].taskinfo.stat=='2'){
-                        strstat='已终止';
-                    }
-                    strtemp=strtemp+'<tr>' +
-                            '<td width="100px">' + data[i].taskinfo.company+ '</td>'+
-                            '<td width="70px">' + data[i].taskinfo.monthlog+ '</td>'+
-                            '<td width="70px">' + data[i].getinfo.geter+ '</td>'+
-                            '<td width="70px">' + strstat+ '</td>'+
-                            '<td width="150px">' + data[i].taskinfo.sev_name+ '</td>'+
-                            '<td width="50px">' + strurl+ '</td>'+
+                    temp=temp+'<tr>'+
+                            '<td>'+data[i].Id+'</td><td><span id="ProcedureName_'+data[i].Id+'">'+data[i].ProcedureName+'</span></td>'+
+                            '<td><span id="TypeName_'+data[i].Id+'">'+data[i].TypeName+'</span></td>'+
+                            '<td><span id="MoneyCost_'+data[i].Id+'">'+data[i].MoneyCost+'</span></td>'+
+                            '<td><span id="TimeCost_'+data[i].Id+'">'+data[i].TimeCost+'</span></td>'+
+                            '<td>'+
+                            '<div class="am-dropdown" data-am-dropdown>'+
+                            '<button  onclick="editProcess('+data[i].Id+');" class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span></button>'+
+                            '</div>'+
+                            '</td>'+
                             '</tr>';
                 }
-                strtemp='<table class="table  table-hover general-table">'+strtemp+'</table>';
-                $("#list").html(strtemp);
-                downfiles();
+                temp='<tbody>'+temp+'</tbody>';
+                temp='<table class="am-table am-table-bd am-table-striped admin-content-table">'+
+                        '<thead>'+
+                        '<tr>'+
+                        '<th>ID</th><th>过程名称</th><th>过程类别</th><th>成本(元)</th><th>周期(天)</th><th>管理</th>'+
+                        '</tr>'+
+                        '</thead>'+temp+'</table>';
+                $('#list').html(temp);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+    //初始化列表
+    function iniPage(){
+        $.ajax({
+            type: "get",
+            //方法所在页面和方法名
+            url: "/procedure/query",
+            data:{keywords:'',Stat:0,currentpage:0,count:pagecount},
+            dataType: "json",
+            success: function (result) {
+                var data=result.result.data;
+                console.log(data);
+                count=result.result.count;
+                $('#totle').html('总记录数：'+count);
+                pages=Math.ceil(count/pagecount);
+                var temp='';
+                for(var i=0;i<data.length;i++){
+                    temp=temp+'<tr>'+
+                            '<td>'+data[i].Id+'</td><td><span id="ProcedureName_'+data[i].Id+'">'+data[i].ProcedureName+'</span></td>'+
+                            '<td><span id="TypeName_'+data[i].Id+'">'+data[i].TypeName+'</span></td>'+
+                            '<td><span id="MoneyCost_'+data[i].Id+'">'+data[i].MoneyCost+'</span></td>'+
+                            '<td><span id="TimeCost_'+data[i].Id+'">'+data[i].TimeCost+'</span></td>'+
+                            '<td>'+
+                            '<div class="am-dropdown" data-am-dropdown>'+
+                            '<button  onclick="editProcess('+data[i].Id+');" class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span></button>'+
+                            '</div>'+
+                            '</td>'+
+                            '</tr>';
+                }
+                temp='<tbody>'+temp+'</tbody>';
+                temp='<table class="am-table am-table-bd am-table-striped admin-content-table">'+
+                        '<thead>'+
+                        '<tr>'+
+                        '<th>ID</th><th>过程名称</th><th>过程类别</th><th>成本(元)</th><th>周期(天)</th><th>管理</th>'+
+                        '</tr>'+
+                        '</thead>'+temp+'</table>';
+                $('#list').html(temp);
             },
             error: function (err) {
                 console.log(err);
@@ -427,18 +593,44 @@
 <div id="div_add" class="am-container addCompany">
     <div class="am-form">
         <div class="am-form-group">
-            <label id="lb_linkman">过程名称</label>
+            <label>过程名称</label>
             <input id="ProcedureName" type="text" placeholder="例如：徐汇区核名">
         </div>
+        <div class="am-form-group">
+            <label >过程类别</label>
+            <div id="Types"></div>
+        </div>
         <div  class="am-form-group">
-            <label id="lb_mobile">单价（元）</label>
-            <input id="MoneyCost" type="number" placeholder="请输入当前过程对外报价">
+            <label id="lb_mobile">执行成本（元）</label>
+            <input id="MoneyCost" type="number" placeholder="完成当前过程的成本">
         </div>
         <div  class="am-form-group">
             <label id="lb_company">时间成本（天）</label>
-            <input id="TimeCost" type="number" placeholder="请输入完成当前过程需要的时间">
+            <input id="TimeCost" type="number" placeholder="完成当前过程需要的时间">
         </div>
         <button type="button" style="margin-bottom: 20px;" id="bn_add" class="am-btn am-btn-primary am-btn-sm am-fl">确定</button>
+    </div>
+</div>
+<!--弹出层时背景层DIV-->
+<div id="div_edit" class="am-container addCompany">
+    <div class="am-form">
+        <div class="am-form-group">
+            <label>过程名称</label>
+            <input id="ProcedureName_edit" type="text" >
+        </div>
+        <div class="am-form-group">
+            <label >过程类别</label>
+            <div id="Types_edit"></div>
+        </div>
+        <div  class="am-form-group">
+            <label id="lb_mobile_edit">执行成本（元）</label>
+            <input id="MoneyCost_edit" type="number" placeholder="完成当前过程的成本">
+        </div>
+        <div  class="am-form-group">
+            <label id="lb_company_edit">时间成本（天）</label>
+            <input id="TimeCost_edit" type="number" placeholder="完成当前过程需要的时间">
+        </div>
+        <button type="button" style="margin-bottom: 20px;" id="bn_update" class="am-btn am-btn-primary am-btn-sm am-fl">更新</button>
     </div>
 </div>
 </html>

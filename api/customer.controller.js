@@ -62,7 +62,6 @@ exports.query=function(req,res){
                     }).sort({'Id':-1}).limit(parseInt(limit)).skip(parseInt(skip)*parseInt(limit));
                 });
             }
-
         }else{
             return res.jsonp(200,{'msg':'no'});
         }

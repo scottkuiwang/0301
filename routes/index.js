@@ -26,7 +26,9 @@ router.get('/dragdiv',function(req,res,next){
 router.get('/login', function(req, res, next) {
     res.render('login');
 });
-
+router.get('/test', function(req, res, next) {
+    res.render('test');
+});
 /* vue. */
 router.get('/vue', function(req, res, next) {
     res.render('vue');

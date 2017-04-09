@@ -98,7 +98,7 @@
 
                 <div class="am-u-sm-6" style="padding-bottom: 6px;">
 
-                    <input type="button" id="add" name="" value="新增公司资料" class="am-btn am-btn-primary am-btn-sm am-fl" >
+                    <input type="button" id="add" name="" value="新增产品" class="am-btn am-btn-primary am-btn-sm am-fl" >
 
                 </div>
                 <div class="am-u-sm-12">
@@ -212,18 +212,170 @@
 <script src="layer/layer.js"></script>
 
 <script type="text/javascript">
-    $("#add").click(function () {
-        layer.open({
-            title:'查看/修改开票公司信息',
-            area: ['600px', '460px'],
-            type: 1,
-            shadeClose: true, //点击遮罩关闭
-            content: $("#div_add")
+    var processList=[];
+    var product_process=[];
+    $(function(){
+        inifrm();
+        $("#add").click(function () {
+            layer.open({
+                title:'新增产品',
+                area: ['600px', '460px'],
+                type: 1,
+                shadeClose: false, //点击遮罩关闭
+                content: $("#div_add")
+            });
+        });
+        $("#bn_save").click(function(){
+            alert('test');
+        });
+        $("#pro-query").click(function(){
+            layer.open({
+                title:'查询过程',
+                area: ['600px', '460px'],
+                type: 1,
+                shadeClose: false, //点击遮罩关闭
+                content: $("#div_query")
+            });
+        });
+        $("#bn_query").click(function(){
+            queryProcess();
         });
     });
-    $(function(){
-
-    });
+    //初始化查询过程数据
+    var iniProcess=function(){
+        $.ajax({
+            type:'get',
+            url:'/procedure/query',
+            data:{'count':100,'currentpage':0,'Stat':'0'},
+            dataType:'json',
+            success:function(datas){
+                if(datas.msg=='yes'){
+                    var data=datas.result.data;
+                    var divlist='';
+                    processList=[];
+                    for(var i=0;i<data.length;i++){
+                        var temp={
+                            Id:data[i].Id,
+                            TypeId:data[i].TypeId,
+                            TypeName:data[i].TypeName,
+                            AgentId:data[i].AgentId,
+                            ProcedureName:data[i].ProcedureName,
+                            Stat:data[i].Stat,
+                            MoneyCost:data[i].MoneyCost,
+                            TimeCost:data[i].TimeCost
+                        };
+                        divlist=divlist+'<tr>' +
+                                '<td style="width: 60px;"><a href="#" onclick=addProcess("'+data[i].Id+'") >选择</a></td>'
+                                +'<td><div style="word-wrap:break-word; word-break:break-all;">【'+data[i].TypeName+'】'+data[i].ProcedureName+'</div>'
+                                + '</td>' +
+                                '</tr>';
+                        processList.push(temp);
+                    }
+                    divlist='<table class="am-table  am-table-hover ">'+divlist+'</table>';
+                    $('#processlist').html(divlist);
+                }
+            },
+            error:function(e){
+                console.log(e);
+            }
+        });
+    };
+    var inifrm=function(){
+        $.ajax({
+            type:'get',
+            url:'/inifrm',
+            data:{},
+            dataType:'json',
+            success:function(data){
+                iniProcess();
+            },
+            error:function(err){
+                console.log(err);
+            }
+        });
+    };
+    //查询过程
+    var queryProcess=function(){
+        var TypeId='';
+        var val_all=$('input:radio[id="all"]:checked').val();
+        var val_t1=$('input:radio[id="t1"]:checked').val();
+        var val_t2=$('input:radio[id="t2"]:checked').val();
+        var val_t3=$('input:radio[id="t3"]:checked').val();
+        var val_t4=$('input:radio[id="t4"]:checked').val();
+        if(val_all=='on'){
+            TypeId='0';
+        }
+        if(val_t1=='on'){
+            TypeId='1';
+        }
+        if(val_t2=='on'){
+            TypeId='2';
+        }
+        if(val_t3=='on'){
+            TypeId='3';
+        }
+        if(val_t4=='on'){
+            TypeId='4';
+        }
+        $.ajax({
+            type:'get',
+            url:'/procedure/query',
+            data:{'count':100,'currentpage':0,'Stat':'0','TypeId':TypeId,'keywords':$('#ProcessName').val()},
+            dataType:'json',
+            success:function(datas){
+                if(datas.msg=='yes'){
+                    var data=datas.result.data;
+                    var divlist='';
+                    processList=[];
+                    for(var i=0;i<data.length;i++){
+                        var temp={
+                            Id:data[i].Id,
+                            TypeId:data[i].TypeId,
+                            TypeName:data[i].TypeName,
+                            AgentId:data[i].AgentId,
+                            ProcedureName:data[i].ProcedureName,
+                            Stat:data[i].Stat,
+                            MoneyCost:data[i].MoneyCost,
+                            TimeCost:data[i].TimeCost
+                        };
+                        divlist=divlist+'<tr>' +
+                                '<td style="width: 60px;"><a href="#" onclick=addProcess("'+data[i].Id+'") >选择</a></td>'
+                                +'<td><div style="word-wrap:break-word; word-break:break-all;">【'+data[i].TypeName+'】'+data[i].ProcedureName+'</div>'
+                                + '</td>' +
+                                '</tr>';
+                        processList.push(temp);
+                    }
+                    divlist='<table class="am-table  am-table-hover ">'+divlist+'</table>';
+                    $('#processlist').html(divlist);
+                }
+            },
+            error:function(e){
+                console.log(e);
+            }
+        });
+    };
+    //添加过程到列表中
+    var addProcess=function(Id){
+        var flag=0;
+        var temp={};
+        for(var i=0;i<product_process.length;i++){
+            if(Id==product_process[i].Id){
+                flag=1;
+            }
+        }
+        if(flag==0){
+            for(var n=0;n<processList.length;n++){
+                if(Id==processList[n].Id){
+                    temp={
+                        Id:processList[n].Id,
+                        OrderId:0,
+                        ProcedureName:processList[n].ProcedureName
+                    };
+                    product_process.push(temp);
+                }
+            }
+        }
+    };
 </script>
 </head>
 </body>
@@ -265,27 +417,59 @@
                 </select>
             </div>
             <div  class="am-form-group">
-                <label id="lb_0">产品组成</label>
-                <table class="am-table am-table-bd am-table-striped admin-content-table">
-                    <tr>
-                        <td>执行序号</td>
-                        <td>工序名称</td>
-                        <td>价格</td>
-                    </tr>
-                    <tr>
-                        <td><input id="order_0" style="width: 40px;"/></td>
-                        <td>核名(金山区)</td>
-                        <td>1500</td>
-                    </tr>
-                    <tr>
-                        <td><input id="order_1" style="width: 40px;"/></td>
-                        <td>核名(徐汇区)</td>
-                        <td>2000</td>
-                    </tr>
-                </table>
+                <div style="float: left"><label id="lb_0">产品组成</label></div>
+                <div style="float: right"><a id="pro-query" href="#">查询过程</a></div><br>
+                <div  style="margin-top: 5px;" class="am-panel am-panel-default" id="pro-msg">
+                    <div class="am-panel-bd" style="color: #0b76ac">请选择至少一个过程！</div>
+                </div>
+                <!--<table class="am-table am-table-bd am-table-striped admin-content-table">-->
+                    <!--<tr>-->
+                        <!--<td>执行序号</td>-->
+                        <!--<td>工序名称</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td><input id="order_0" type="number" style="width: 80px;"/></td>-->
+                        <!--<td>核名(金山区)</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td><input id="order_1" type="number" style="width: 80px;"/></td>-->
+                        <!--<td>核名(徐汇区)</td>-->
+                    <!--</tr>-->
+                <!--</table>-->
             </div>
 
             <button type="button" style="margin-bottom: 20px;" id="bn_save" class="am-btn am-btn-primary am-btn-sm am-fl">确定</button>
         </div>
     </div>
+<!--弹出查询过程dIV-->
+<div id="div_query" class="am-container addCompany">
+    <div class="am-form" style="padding-top: 10px;padding-bottom: 10px;">
+        <table>
+            <tr>
+                <td style="width: 100px;">类别</td>
+                <td><input name="radio1"  type="radio" id="all" checked="true" />所有类别
+                    <input type="radio" name="radio1" id="t1" />工商注册
+                    <input type="radio" name="radio1" id="t2" />工商变更
+                    <input type="radio" name="radio1" id="t3" />银行开户
+                    <input type="radio" name="radio1" id="t4" />财务代理</td>
+            </tr>
+            <tr>
+                <td style="width: 100px;height:10px;"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="width: 100px">过程名称</td>
+                <td><input id="ProcessName" type="text" ></td>
+            </tr>
+            <tr>
+                <td style="width: 100px">
+                    <button type="button"  id="bn_query" class="am-btn am-btn-primary am-btn-sm am-fl">查询</button>
+                </td>
+                <td ></td>
+            </tr>
+        </table>
+        <div style="color:#078be5;width:100%;height:30px;margin-top: 15px;margin-bottom: 5px;">查询结果</div>
+        <div id="processlist"></div>
+    </div>
+</div>
 </html>

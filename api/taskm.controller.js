@@ -31,3 +31,8 @@ exports.updateTaskm=function(req,res){
         console.log(e);
     }
 };
+
+//获取任务数
+exports.getTasks=function(req,res){
+
+};

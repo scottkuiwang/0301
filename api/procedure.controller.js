@@ -2,6 +2,7 @@
  * Created by apple on 2017/3/8.
  */
 var procedure=require('./../models/schema/tb_procedures.js');
+var types=require('./../models/schema/tb_types.js');
 var async=require('async'),
     url = require("url");
 var _ = require('lodash');
@@ -86,24 +87,26 @@ exports.createProcedure=function(req,res){
 exports.updateProcedure=function(req,res){
     if(req.session.userinfo) {
         var _id = req.params.Id;
-        var AgentId = req.body.AgentId;
+        var AgentId = req.session.userinfo.AgentId;
         var ProcedureName = req.body.ProcedureName;
         var MoneyCost = req.body.MoneyCost;
         var TimeCost = req.body.TimeCost;
         var TypeId=req.body.TypeId;
         try {
             var postdata = {
-                AgentId: AgentId,
+                AgentId: parseInt(AgentId),
                 ProcedureName: ProcedureName,
-                TypeId:TypeId,
-                MoneyCost: MoneyCost,
-                TimeCost: TimeCost
+                TypeId:parseInt(TypeId),
+                MoneyCost: parseInt(MoneyCost),
+                TimeCost: parseInt(TimeCost)
             };
-            procedure.update({'_id': _id}, {$set: postdata}, function (err, result) {
-                if (err) {
-                    console.log(err);
-                }
-                return res.jsonp(201, result);
+            procedure.findOne({'Id':_id},function(err,data){
+                procedure.update({'_id': data._id}, {$set: postdata}, function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    return res.jsonp(201,{'msg':'YES','data':result});
+                });
             });
         } catch (e) {
             console.log(e);
@@ -113,6 +116,7 @@ exports.updateProcedure=function(req,res){
     }
 };
 
+//查询过程
 exports.listProcedure=function(req,res){
     if(req.session.userinfo) {
         var args=url.parse(req.url,true).query;
@@ -120,30 +124,57 @@ exports.listProcedure=function(req,res){
         var skip=args.currentpage;
         var where = {'AgentId':req.session.userinfo.AgentId};
         //模糊查询keywords中关键字
-        if(args.ProcedureName&& args.ProcedureName != "") {
-            var qs=new RegExp(args.ProcedureName);
+        if(args.keywords&& args.keywords != "") {
+            var qs=new RegExp(args.keywords);
             _.assign(where,{"ProcedureName":qs});
         }
         if(args.Stat && args.Stat != "") {
             _.assign(where,{"Stat":args.Stat});
         }
-        if(args.TypeId && args.TypeId != "") {
+        if(args.TypeId && args.TypeId != "0") {
             _.assign(where,{"TypeId":args.TypeId});
         }
         procedure.count(where,function(err,countdata){
             if(err) { console.log(err);}
             procedure.find(where,function(err,data){
                 if(err) { console.log(err);}
-                var result={
-                    'count':countdata,
-                    'data':data
-                };
-                return res.jsonp(200, {'msg':'yes','result':result});
+                var temp={};
+                var resdata=[];
+                async.forEachSeries(data,function(item,cb){
+                    getTypeInfo(item.TypeId,function(typename){
+                        temp={
+                            AgentId:item.AgentId,
+                            Id:item.Id,
+                            MoneyCost:item.MoneyCost,
+                            ProcedureName:item.ProcedureName,
+                            Stat:item.Stat,
+                            TimeCost:item.TimeCost,
+                            TypeId:item.TypeId,
+                            TypeName:typename
+                        };
+                        resdata.push(temp);
+                        cb();
+                    });
+                },function(err){
+                    var result={
+                        'count':countdata,
+                        'data':resdata
+                    };
+                    return res.jsonp(200, {'msg':'yes','result':result});
+                });
             }).sort({'createdby':-1}).limit(parseInt(limit)).skip(parseInt(skip)*parseInt(limit));
         });
     }else{
         return res.jsonp(200,{'msg':'no'});
     }
+};
+
+//获取
+var getTypeInfo=function(TypeId,callback){
+    types.findOne({'Id':TypeId},function(err,data){
+        if(err){console.log(err);}
+        callback(data.TypeName);
+    });
 };
 
 exports.removeProcedure=function(req,res){
@@ -159,16 +190,20 @@ exports.removeProcedure=function(req,res){
 
 //明细
 exports.getProdureById=function(req,res){
-    var Id=req.params.Id;
-    var where={
-        Id:Id
-    };
-    try{
-        procedure.findOne(where,function(err,data){
-            if(err){console.log(err);}
-            return res.jsonp(200,data);
-        });
-    }catch(e){
+    if(req.session.userinfo){
+        var Id=req.params.Id;
+        var where={
+            Id:Id
+        };
+        try{
+            procedure.findOne(where,function(err,data){
+                if(err){console.log(err);}
+                return res.jsonp(200,data);
+            });
+        }catch(e){
+            console.log(e);
+        }
+    }else{
         console.log(e);
     }
 };
