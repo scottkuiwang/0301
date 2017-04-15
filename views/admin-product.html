@@ -226,7 +226,19 @@
             });
         });
         $("#bn_save").click(function(){
-            alert('test');
+            var data=checkOrder();
+            if(data.flag==1){
+                alert('请填写序号！');
+                return;
+            }
+            if(data.flag==-1){
+                alert('序号必须大于0！');
+                return;
+            }
+            if(data.flag==0){
+                alert('OK！');
+                return;
+            }
         });
         $("#pro-query").click(function(){
             layer.open({
@@ -397,8 +409,8 @@
         }
         var Str_temp='<tr><td>执行序号</td><td>过程名称</td><td>操作</td></tr>';
         for(var m=0;m<product_process.length;m++){
-            Str_temp=Str_temp+'<tr><td><input id="order_'+product_process[m].Id+'" type="number" style="width: 80px;"/></td>'
-                    +'<td>'+product_process[m].ProcedureName+'</td>'
+            Str_temp=Str_temp+'<tr><td><input class="process_order" id="order_'+product_process[m].Id+'" type="number" style="width: 80px;"/></td>'
+                    +'<td><span id="proname_'+product_process[m].Id+'">'+product_process[m].ProcedureName+'</span></td>'
                     +'<td><a href="#" onclick=delitem("'+product_process[m].Id+'")><span style="color: #0e90d2;">删除</span></a></td>'
                     +'</tr>'
             ;
@@ -409,17 +421,95 @@
         $('#pro-msg').css('display','none');
         layer.msg('选择成功！', {icon: 1});
     };
-    var delitem=function(Id){
+    //删除
+    var delitem=function(id){
         //询问框
         layer.confirm('确定删除吗？', {
             btn: ['是','否'] //按钮
         }, function(){
-            //是
+            var Str_temp='<tr><td>执行序号</td><td>过程名称</td><td>操作</td></tr>';
+            var Id='';
+            var old_product_process=product_process;
+            product_process=[];
+            for(var n=0;n<old_product_process.length;n++){
+                if(id!=old_product_process[n].Id){
+                    temp={
+                        Id:old_product_process[n].Id,
+                        OrderId:0,
+                        ProcedureName:old_product_process[n].ProcedureName
+                    };
+                    product_process.push(temp);
+                }
+            }
+
+            var orderVal='';
+            var flag=0;
+            var Str_temp='<tr><td>执行序号</td><td>过程名称</td><td>操作</td></tr>';
+            for(var m=0;m<product_process.length;m++){
+                var temp_id=product_process[m].Id;
+                orderVal=$('#order_'+temp_id).val();
+                Str_temp=Str_temp+'<tr><td><input class="process_order" id="order_'+product_process[m].Id+'" value="'+orderVal+'" type="number" style="width: 80px;"/></td>'
+                        +'<td><span id="proname_'+product_process[m].Id+'">'+product_process[m].ProcedureName+'</span></td>'
+                        +'<td><a href="#" onclick=delitem("'+product_process[m].Id+'")><span style="color: #0e90d2;">删除</span></a></td>'
+                        +'</tr>'
+                ;
+                flag=1;
+            }
+            Str_temp='<table id="produre-list" class="am-table am-table-bd am-table-striped admin-content-table">'+Str_temp+'</table>';
+            $('#producelist').html(Str_temp);
+            if(flag==0){
+                $('#producelist').css('display','none');
+                $('#pro-msg').css('display','block');
+            }else{
+                $('#producelist').css('display','block');
+                $('#pro-msg').css('display','none');
+            }
             layer.msg('删除成功！', {icon: 1});
         }, function(){
             //否
         });
     };
+    //判断过程序号设置是否正确
+    var checkOrder=function(){
+        var Process_Order=[];
+        var temp={};
+        var NowOrderId=0;
+        var flag=0;
+        $('.process_order').each(function(){
+            var OrderId=this.id;
+            var Id=OrderId.replace('order_','');
+            NowOrderId=parseInt($('#'+OrderId).val());
+            if($('#'+OrderId).val()==''){
+                if(flag==0){
+                    flag=1;
+                }
+            }else{
+                var Val=parseInt($('#'+OrderId).val());
+                if(Val<=0){
+                    if(flag==0){
+                        flag=-1;
+                    }
+                }
+            }
+            temp={
+                OrderId:$('#'+OrderId).val(),
+                Id:Id,
+                ProcessName:$('#proname_'+Id).html()
+            };
+            Process_Order.push(temp);
+        });
+        Process_Order.sort(desc);
+        var postdata={
+            flag:flag,
+            data:Process_Order
+        };
+        return postdata;
+    };
+    //对json进行降序排序函数
+    var desc = function(x,y)
+    {
+        return (x["OrderId"] < y["OrderId"]) ? 1 : -1
+    }
 </script>
 </head>
 </body>
@@ -493,7 +583,7 @@
                 <td><input id="ProcessName" type="text" ></td>
             </tr>
             <tr>
-                <td style="width: 100px">
+                <td style="width: 100px;">
                     <button type="button"  id="bn_query" class="am-btn am-btn-primary am-btn-sm am-fl">查询</button>
                 </td>
                 <td ></td>
