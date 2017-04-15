@@ -39,7 +39,15 @@ router.get('/neworder', function(req, res, next) {
     res.render('order-new');
 });
 
+/* order. */
+router.get('/form', function(req, res, next) {
+    res.render('admin-form');
+});
+
 router.get('/inifrm',index.inifrm);
+
+
+router.get('/:id/app',index.test);
 
 
 module.exports = router;

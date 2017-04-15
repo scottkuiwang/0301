@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="icon" type="image/png" href="assets/i/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <link rel="icon" type="../image/png" href="../assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-    <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
-    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -204,12 +204,12 @@
 <![endif]-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="assets/js/jquery.min.js"></script>
+<script src="../assets/js/jquery.min.js"></script>
 <!--<![endif]-->
-<script src="assets/js/amazeui.min.js"></script>
-<script src="assets/js/app.js"></script>
+<script src="../assets/js/amazeui.min.js"></script>
+<script src="../assets/js/app.js"></script>
 <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
-<script src="layer/layer.js"></script>
+<script src="../layer/layer.js"></script>
 
 <script type="text/javascript">
     var processList=[];
@@ -288,11 +288,31 @@
             dataType:'json',
             success:function(data){
                 iniProcess();
+                iniProductProcess();
             },
             error:function(err){
                 console.log(err);
             }
         });
+    };
+    var iniProductProcess=function(){
+        if(product_process.length>0){
+            var Str_temp='<tr><td>执行序号</td><td>过程名称</td><td>操作</td></tr>';
+            for(var m=0;m<product_process.length;m++){
+                Str_temp=Str_temp+'<tr><td><input id="order_'+product_process[m].Id+'" type="number" style="width: 80px;"/></td>'
+                        +'<td>'+product_process[m].ProcedureName+'</td>'
+                        +'<td><a href="#" onclick=delitem("'+product_process[m].Id+'")><span style="color: #0e90d2;">删除</span></a></td>'
+                        +'</tr>'
+                ;
+            }
+            Str_temp='<table id="produre-list" class="am-table am-table-bd am-table-striped admin-content-table">'+Str_temp+'</table>';
+            $('#producelist').html(Str_temp);
+            $('#producelist').css('display','block');
+            $('#pro-msg').css('display','none');
+        }else{
+            $('#pro-msg').css('display','block');
+            $('#producelist').css('display','none');
+        }
     };
     //查询过程
     var queryProcess=function(){
@@ -375,6 +395,30 @@
                 }
             }
         }
+        var Str_temp='<tr><td>执行序号</td><td>过程名称</td><td>操作</td></tr>';
+        for(var m=0;m<product_process.length;m++){
+            Str_temp=Str_temp+'<tr><td><input id="order_'+product_process[m].Id+'" type="number" style="width: 80px;"/></td>'
+                    +'<td>'+product_process[m].ProcedureName+'</td>'
+                    +'<td><a href="#" onclick=delitem("'+product_process[m].Id+'")><span style="color: #0e90d2;">删除</span></a></td>'
+                    +'</tr>'
+            ;
+        }
+        Str_temp='<table id="produre-list" class="am-table am-table-bd am-table-striped admin-content-table">'+Str_temp+'</table>';
+        $('#producelist').html(Str_temp);
+        $('#producelist').css('display','block');
+        $('#pro-msg').css('display','none');
+        layer.msg('选择成功！', {icon: 1});
+    };
+    var delitem=function(Id){
+        //询问框
+        layer.confirm('确定删除吗？', {
+            btn: ['是','否'] //按钮
+        }, function(){
+            //是
+            layer.msg('删除成功！', {icon: 1});
+        }, function(){
+            //否
+        });
     };
 </script>
 </head>
@@ -422,20 +466,7 @@
                 <div  style="margin-top: 5px;" class="am-panel am-panel-default" id="pro-msg">
                     <div class="am-panel-bd" style="color: #0b76ac">请选择至少一个过程！</div>
                 </div>
-                <!--<table class="am-table am-table-bd am-table-striped admin-content-table">-->
-                    <!--<tr>-->
-                        <!--<td>执行序号</td>-->
-                        <!--<td>工序名称</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td><input id="order_0" type="number" style="width: 80px;"/></td>-->
-                        <!--<td>核名(金山区)</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td><input id="order_1" type="number" style="width: 80px;"/></td>-->
-                        <!--<td>核名(徐汇区)</td>-->
-                    <!--</tr>-->
-                <!--</table>-->
+                <div id="producelist"></div>
             </div>
 
             <button type="button" style="margin-bottom: 20px;" id="bn_save" class="am-btn am-btn-primary am-btn-sm am-fl">确定</button>
