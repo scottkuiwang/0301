@@ -5,8 +5,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var tb_productsSchema = new Schema({
+    Id:Number,
     AgentId:Number,
-    Pid:Number,
     Type:Number,
     ProductName:String,//名称
     Price:Number,//价格
